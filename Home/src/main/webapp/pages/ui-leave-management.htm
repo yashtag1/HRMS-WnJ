@@ -1,0 +1,45 @@
+
+<div id="wrapper">
+
+	<!--Start Header -->
+
+	<!--End Header -->
+
+	<div id="page-wrapper">
+		<div class="container incr-height">
+			<!--Start Content -->
+			<div style="width: 8%; float: left; margin-left: 9%;">
+				<!-- required for floating -->
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs tabs-left padding-right0 profile-tab">
+					<li id="eli"><a ui-sref=".leaveEligiblity" data-toggle="tab" data-placement="left" data-original-title="Leave Eligibility" 
+						class="bordertop0"><img src="../assets/images/leave-img1.png"
+							width="45" height="61"></a></li>
+					<li id="form"><a ui-sref=".leaveForm" data-toggle="tab" data-placement="left" data-original-title="Leave Form"><img
+							src="../assets/images/leave-img2.png" width="40" height="51"></a></li>
+					<li id="my"><a ui-sref=".myleaves" data-toggle="tab" data-placement="left" data-original-title="My Leaves"><img
+							src="../assets/images/leave-img3.png" width="47" height="47"></a></li>
+					<li id="lapp"><a ui-sref=".leaveApproval" data-toggle="tab" data-placement="left" data-original-title="Leave Approvals" 
+						class="borderbtm0"><img src="../assets/images/leave-img4.png"
+							width="50" height="48"></a></li>
+				</ul>
+			</div>
+
+			<div class="col-xs-9">
+				<!-- Tab panes -->
+				<div class="tab-content">
+					<div ui-view></div>
+				</div>
+			</div>
+
+			<!--End Content -->
+		</div>
+		<!-- /#container -->
+	</div>
+	<!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+
+

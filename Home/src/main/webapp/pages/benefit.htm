@@ -1,0 +1,248 @@
+<div class="tab-pane active fade in" id="benefitType">
+	<div validate="validate" id="validation-form" role="form"
+		class="form-horizontal col-md-12 tab-cont-align" name="myForm">
+
+		<div class="prof-tab-title">Benefit</div>
+		<a href="#add" data-toggle="modal">Add Benefit</a>
+
+
+
+
+		<div class="radio  col-md-2">
+			<label><input type="radio" name="isMailing" ng-value="1"
+				id="optionsRadios1" ng-model="isMailing" required> Type</label>
+		</div>
+
+
+		<div class="radio  col-md-2">
+			<label><input type="radio" name="isMailing" ng-value="2"
+				id="optionsRadios1" ng-model="isMailing" required> Year</label>
+		</div>
+		<div class="radio  col-md-2">
+			<label><input type="radio" name="isMailing" ng-value="3"
+				id="optionsRadios1" ng-model="isMailing" required> Name</label>
+		</div>
+
+		<div class="radio  col-md-2">
+			<label><input type="radio" name="isMailing" ng-value="4"
+				id="optionsRadios1" ng-model="isMailing" required> Id</label>
+		</div>
+		<div>
+
+			<input type="text" ng-show="isMailing== 1" placeholder="Search"
+				ng-model="search.benefitType.description" class="search-query"
+				style="width: 80px"> <input type="text"
+				ng-show="isMailing== 2" placeholder="Search" ng-model="search.year"
+				class="search-query" style="width: 80px"><input type="text"
+				ng-show="isMailing== 3" placeholder="Search"
+				ng-model="search.employee.firstName" class="search-query"
+				style="width: 80px"><input type="text"
+				ng-show="isMailing== 4" placeholder="Search"
+				ng-model="search.employee.id" class="search-query"
+				style="width: 80px">
+
+
+
+
+			<button type="submit" class="btn"
+				ng-hide="isMailing== 1 || isMailing== 2 || isMailing== 3|| isMailing== 4">Search</button>
+
+			<table width="100%"
+				class="table-hover table-striped table table-bordered"
+				style="margin-top: 30px;">
+				<thead>
+					<tr>
+						<th>Emp ID</th>
+						<th>Name</th>
+						<th>Type</th>
+						<th>Eligibility</th>
+						<th>Year</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr
+						data-ng-repeat="benefit in benefitList | filter:search:strict | startFrom:currentPage*pageSize | limitTo:pageSize">
+						<td>{{benefit.employee.id}}</td>
+						<td>{{benefit.employee.firstName}}</td>
+						<td>{{benefit.benefitType.description}}</td>
+						<td>{{benefit.value}}</td>
+						<td>{{benefit.year}}</td>
+						<td><a href="#edit" ng-click="editBenefit(benefit)"
+							data-toggle="modal">Edit</a>| <a
+							ng-click="deleteBenefit(benefit)">Delete</a></td>
+
+					</tr>
+				</tbody>
+			</table>
+			<button ng-disabled="currentPage == 0"
+				ng-click="currentPage=currentPage-1">Previous</button>
+			{{currentPage+1}}/{{numberOfPages()}}
+			<button ng-disabled="currentPage >= benefitList.length/pageSize - 1"
+				ng-click="currentPage=currentPage+1">Next</button>
+		</div>
+		<div role="dialog" class="modal fade in" id="add">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button aria-hidden="true" data-dismiss="modal" class="close"
+							type="button">X</button>
+						<h4 class="modal-title">Add Benefit</h4>
+					</div>
+					<div class="modal-body">
+						<fieldset>
+							<div class="col-md-12">
+
+								<div class="col-md-5">
+
+									<input type="hidden" name="id" ng-model="benefit.id">
+								</div>
+
+							</div>
+
+							
+							
+							<label for="" class="col-md-6">Emp Name</label>
+							<div class="col-md-5">
+								<input type="text" name="benefit" class="form-control"
+									ng-model="benefit.employee" required
+									typeahead="Type as Type.firstName for Type in employeeList | filter:{firstName:$viewValue}">
+							</div>
+							<div>&nbsp;</div>
+							<div>&nbsp;</div>
+							
+							<label for="" class="col-md-6">Emp ID</label>
+							<div class="col-md-5">
+								<input type="text" name="type" placeholder="ID"
+									class="form-control" ng-model="benefit.employee.id" value="{{benefit.employee.id}}" ng-readonly="true"  required>
+							</div>
+							<div>&nbsp;</div>
+							<div>&nbsp;</div>
+
+							<label for="" class="col-md-6">Type</label>
+							<div class="col-md-5">
+								<select id="Type" name="benefit" class="form-control"
+									ng-model="benefit.benefitType" required
+									ng-options="Type as Type.description for Type in benefitTypeList">
+									<option class="" value="" ng-selected="selected">Select
+										Type</option>
+								</select>
+							</div>
+							<div>&nbsp;</div>
+							<div>&nbsp;</div>
+
+							<label for="" class="col-md-6">Eligibility</label>
+							<div class="col-md-5">
+								<input type="text" name="type" placeholder="Value"
+									class="form-control" ng-model="benefit.value" required>
+							</div>
+
+							<div>&nbsp;</div>
+							<div>&nbsp;</div>
+
+							<label for="" class="col-md-6">Year</label>
+							<div class="col-md-5">
+								<input type="text" name="type" placeholder="Year"
+									class="form-control" ng-model="benefit.year" required>
+							</div>
+
+							<div>&nbsp;</div>
+							<div>&nbsp;</div>
+
+							<button class="btn btn-success pull-right" type="submit"
+								ng-click="addBenefit()" value="Save">Save</button>
+						</fieldset>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<div role="dialog" class="modal fade in" id="edit">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button aria-hidden="true" data-dismiss="modal" class="close"
+							type="button">X</button>
+						<h4 class="modal-title">Edit Benefit</h4>
+					</div>
+					<div class="modal-body">
+						<fieldset>
+
+							<div class="col-md-12">
+
+								<div class="col-md-5">
+
+									<input type="hidden" name="id" ng-model="benefit.id">
+								</div>
+							</div>
+							<label for="" class="col-md-6">Emp Name</label>
+							<div class="col-md-5">
+								<input type="text" name="type" placeholder="Name"
+									class="form-control" ng-model="benefit.employee.firstName" required>
+							</div>
+
+
+
+							<div>&nbsp;</div>
+							<div>&nbsp;</div>
+							
+							
+							<label for="" class="col-md-6">Emp ID</label>
+							<div class="col-md-5">
+								<input type="text" name="type" placeholder="ID"
+									class="form-control" ng-model="benefit.employee.id" required>
+							</div>
+
+
+
+							<div>&nbsp;</div>
+							<div>&nbsp;</div>
+							
+
+
+							<label for="" class="col-md-6">Type</label>
+							<div class="col-md-5">
+								<input type="text" name="type" placeholder="Type"
+									class="form-control" ng-model="benefit.benefitType.description"
+									required>
+							</div>
+
+
+
+							<div>&nbsp;</div>
+							<div>&nbsp;</div>
+
+
+							<label for="" class="col-md-6">Eligibility</label>
+							<div class="col-md-5">
+								<input type="text" name="type" placeholder="Value"
+									class="form-control" ng-model="benefit.value" required>
+							</div>
+
+
+							<div>&nbsp;</div>
+							<div>&nbsp;</div>
+
+
+
+
+							<button class="btn btn-success pull-right" type="submit"
+								ng-click="addBenefit()" value="Save">Save</button>
+
+						</fieldset>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+

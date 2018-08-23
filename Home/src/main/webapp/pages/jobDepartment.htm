@@ -1,0 +1,86 @@
+<div class="tab-pane fade in" id="jobDepartment"
+	ng-controller="departmentController">
+	<!-- start add benefit -->
+	<form validate="validate" id="" role="form"
+		class="form-horizontal col-md-9 ng-pristine ng-invalid ng-invalid-required"
+		name="myForm">
+<!-- 		<div class="prof-tab-title col-md-12 padding-zero">
+			Department <span class="add-link" ng-click="addDept()"><a href="" id="addDetails">[
+					Add <i class="fa fa-plus-circle"></i> ]
+			</a></span>
+			<div class="input-group col-md-5 pull-right search-bx">
+				<input type="text" class="form-control search-query" placeholder="Search" ng-model="search.name">
+				<span class="input-group-btn">
+					<button class="btn btn-default search-style" type="button">
+						<i class="fa fa-search"></i>
+					</button>
+				</span>
+			</div>
+		</div> -->
+		
+			<div class="prof-tab-title col-md-12 pull-left padding-zero"><div class="title-font pull-left">Department <span class="add-link" ng-click="addDept()"><a href="" id="addDetails">[ Add <i class="fa fa-plus-circle"></i> ]</a></span>
+</div>
+               <div class="subnavbar pull-right">
+                  <ul class="nav pull-right">
+                    <li class="dropdown">
+				<!-- <button class="btn btn-primary pull-right dropdown-toggle search-fltr" data-toggle="dropdown" type="button"><i class="fa 
+
+fa-filter"></i></button>  -->
+               <!--  <ul class="dropdown-menu pull-right search-dd">
+                    <li><a href="#" data-original-title="" title="">Employee ID</a></li>
+                    <li><a href="profile.html" data-original-title="" title="">Employee Name</a></li>
+                    <li><a href="#" data-original-title="" title="">Department</a></li>
+                </ul>     -->            
+                	</li>
+                  </ul>
+				</div>
+                <div class="col-md-4 pull-right search-bx padding-zero">
+                    <input class="form-control" type="text"  name="" placeholder="Search Department" ng-model="search.name">
+                </div>
+              </div>		
+
+		<div class="col-lg-5 padding-zero" id="addForm" style="display: none">
+			<label for="" class="col-md-6 padding-zero">Department title</label>
+			<input class="form-control" type="text" name="name"
+				ng-model="department.name" required=""> <br> <label
+				for="" class="col-md-9 padding-zero">Department description</label>
+			<input class="form-control" type="text" name="description"
+				ng-model="department.description" required=""> <br>
+			<div
+				class="col-md-12 col-xs-12 col-sm-12 col-lg-12 padding-zero  button-align">
+				<button type="button" ng-click="cancel()"
+					class="btn btn-warning pull-right btn-align-reg">
+					<i class="fa fa-times-circle"></i> Cancel
+				</button>
+				<button ng-click="saveDepartment()" type="submit"
+					class="btn btn-primary pull-right ">
+					<i class="fa fa-save"></i> Save
+				</button>
+				
+			</div>
+		</div>
+
+		<table width="100%"
+			class="table-hover table-striped table table-bordered">
+			<tbody>
+				<tr>
+					<th>Department title</th>
+					<th>Department description</th>
+					<th class="width10">Edit</th>
+					<th class="width10">Delete</th>
+				</tr>
+				<tr data-ng-repeat="department in departments| filter:search:strict">
+					<td>{{department.name}}</td>
+					<td>{{department.description}}</td>
+					<td class="settings-edit" ng-click="editdept(department)"><a
+						href=""><i class="fa fa-edit"></i></a></td>
+					<td class="settings-delete" ng-click="deletedept(department)"><a
+						href=""><i class="fa fa-trash-o"></i></a></td>
+				</tr>
+
+			</tbody>
+		</table>
+
+	</form>
+	<!-- end add benefit -->
+</div>

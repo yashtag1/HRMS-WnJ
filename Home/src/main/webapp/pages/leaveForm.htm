@@ -1,0 +1,86 @@
+
+<div class="col-lg-12" style="background-color: #fff;">
+	<h1 class="page-header">Leave Application Form</h1>
+	<form name="myForm" class="form-horizontal col-md-7" role="form"
+		id="validation-form" validate="validate"
+		ng-controller="leaveController">
+		<fieldset>
+			<div class="form-group">
+				<label class="col-lg-3" for="name">Designation*</label>
+				<div class="col-lg-8">
+					<select id="dept" name="dname" class="form-control"
+						ng-model="employee.dname" required
+						ng-options="dept.id as dept.name for dept in options">
+						<option value="" ng-selected="selected">Select Department</option>
+					</select>
+				</div>
+
+			</div>
+
+			<div class="form-group">
+				<label class="col-md-3">I request leave*</label>
+				<div class="col-md-8">
+					<div class="input-group">
+						<input type="text" name="leave" placeholder="From"
+							class="form-control" ng-model="employee.start" jqdatepicker required> <span
+							ng-show="myForm.start.$error.required">This is not a valid
+							Date.</span><span class="input-group-addon">&nbsp;<i
+							class="fa fa-calendar fa-fw"></i></span><input 
+							type="text" name="leave" placeholder="To" class="form-control"
+							ng-model="employee.end" style="margin: 0 6px;" jqdatepicker required>
+						<span ng-show="myForm.end.$error.required">This is not a
+							valid Date.</span><span  class="input-group-addon"><i
+							class="fa fa-calendar fa-fw"></i></span>
+					</div>
+				</div>
+
+			</div>
+			<div class="form-group">
+				<label class="col-lg-3">Type of leave*</label>
+				<div class="col-lg-8">
+					<select id="type" name="tleave" class="form-control"
+						ng-model="employee.tleave" required
+						ng-options="type.id as type.name for type in ctrl">
+						<option value="" ng-selected="selected">Select Type</option>
+
+					</select>
+				</div>
+
+			</div>
+			<div class="form-group">
+				<label class="col-lg-3" for="name">Reasons*</label>
+				<div class="col-lg-8">
+					<textarea rows="4" cols="50" placeholder="Comments"
+						class="form-control" ng-model="employee.reason" required></textarea>
+
+				</div>
+
+			</div>
+			<div class="form-group">
+				<label class="col-lg-3" for="name">Contact details while on
+					leave*</label>
+				<div class="col-lg-8">
+					<input type="text" name="phone" placeholder="Phone"
+						class="form-control" ng-model="employee.phone" required>
+
+				</div>
+
+			</div>
+			<!-- /.form-group -->
+			<br>
+			<div class="form-group">
+				<div class="col-lg-4"></div>
+				<div class="col-lg-7">
+				<button class="btn btn-default pull-right"
+						ng-click="cancelSubmit()">Cancel</button>
+						&nbsp;&nbsp;
+					<button class="btn btn-success pull-right" type="submit"
+						ng-click="requestLeave()" ng-enabled="myForm.$valid"
+						style="margin: 0 5px;">
+						<i class="icon-ok"></i> Submit
+					</button>
+				</div>
+			</div>
+		</fieldset>
+	</form>
+</div>

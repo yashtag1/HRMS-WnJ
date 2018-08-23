@@ -1,0 +1,341 @@
+  <div class="tab-pane active fade in" id="manageUsers">
+	
+	<form validate="validate" id="" role="form"
+		class="form-horizontal col-md-9 ng-pristine ng-invalid ng-invalid-required"
+		name="myForm">
+		
+		
+			<div class="prof-tab-title col-md-12 pull-left padding-zero"><div class="title-font pull-left">Manage Users <span class="add-link" ng-click="NewUser()"><a href="" id="NewUser">[ Add <i class="fa fa-plus-circle"></i> ]</a></span>
+</div>
+               <div class="subnavbar pull-right">
+                  <ul class="nav pull-right">
+                    <li class="dropdown">
+				<button class="btn btn-primary pull-right dropdown-toggle search-fltr" data-toggle="dropdown" type="button"><i class="fa 
+
+fa-filter"></i></button> 
+                <ul class="dropdown-menu pull-right search-dd drp-dwn-align">
+                 
+             	 <li><label>&nbsp;<input type="radio" name="isMailing" ng-value="1"
+				id="optionsRadios1" ng-model="isSearch" required> Employee name</label></li>
+                    <li><label>&nbsp;<input type="radio" name="isMailing" ng-value="2"
+				id="optionsRadios1" ng-model="isSearch" required> Employee id</label></li> 
+			
+			 </ul>                     
+                	</li>
+                  </ul>
+				</div>
+				
+				 <div class="col-md-4 pull-right search-bx padding-zero">
+                <input class="form-control search-query" type="text" ng-show="isSearch== 1" placeholder="Search EmpName"
+				ng-model="search.firstName">
+				
+				 <input class="form-control search-query" type="text"
+				ng-show="isSearch== 2" placeholder="Search EmpID" ng-model="search.empId">
+
+				<input class="form-control" type="text"  name="" placeholder="Search" ng-hide="isSearch== 1 || isSearch== 2">
+                </div>
+              </div>		
+
+			<div class="col-lg-8 padding-zero" id="addForm" style="display: none;">
+			<input class="form-control" type="hidden" id="userId" name="id"
+					ng-model="user.id" required>
+					
+				<label for="" class="col-md-6 padding-zero">User name</label> <input
+					class="form-control" type="text" name="uname"
+					ng-model="user.username" required  autofocus>
+				<span class="message" ng-show="userMessage=='User name Already Exists !'">
+				{{userMessage}}</span><br>
+
+				<label for="" class="col-md-6 padding-zero">Email id</label> <input
+					class="form-control" type="text" id="input" name="input"
+					ng-model="employee.emailId"  ng-pattern="/^[A-Za-z0-9._%+-]+@aximsoft.com$/" required>
+					<span ng-show="myForm.input.$error.pattern" class="ng-hide"><span class="message">This is not a
+										official email.</span></span>
+					<span class="message" ng-show="userMessage=='Email Already Exists !'">{{userMessage}}</span>
+					<div class="message" ng-show="userMessage=='User name and Email Already Exists !'">{{userMessage}}</div><br>
+					
+					
+				<label for="" class="col-md-6 padding-zero">Password</label> <input
+					type="password" name="pass" class="form-control"
+					ng-model="user.password" ng-minlength="4" required>
+					<span ng-show="myForm.pass.$error.minlength" class="message">minimum 4 chars</span>
+					<!-- <span ng-show="myForm.pass.$error.maxlength" class="message">maximum 16 chars</span> -->
+					<br>
+				
+				 <label for="" class="col-md-9 padding-zero" ng-hide="isNewUser">Confirm password</label>
+				<input class="form-control" name="repeatPassword" ng-hide="isNewUser"
+					type="password" ng-model="repeatPassword" required><div ng-blur="" ng-hide="isNewUser">
+					<span class="message">{{pwd}}</span></div><br ng-hide="isNewUser"> 
+					
+					<label for="" class="col-md-6 padding-zero">Employee id</label> <input
+					class="form-control" type="text" name="empId"
+					ng-model="employee.empId" required><br>
+					
+					<label for="" class="col-md-6 padding-zero">First name</label> <input
+					class="form-control" type="text" name="f_name"
+					ng-model="employee.firstName" required><br>
+					
+					<label for="" class="col-md-6 padding-zero">Last name</label> <input
+					class="form-control" type="text" name="l_name"
+					ng-model="employee.lastName" required><br>
+					
+					<label for="" class="col-md-15 padding-zero">Date of birth</label><div class="input-group">
+					<input type="text" name="dob"  class="form-control"
+				     ng-model="employee.dob" jqdatepicker required/> <span
+					ng-show="myForm.dob.$error.required"></span><span 
+					class="input-group-addon">&nbsp;<i
+					class="fa fa-calendar fa-fw"></i></span>
+					</div><br>
+					
+				<div
+					class="col-md-12 col-xs-12 col-sm-12 col-lg-12 padding-zero button-align">
+					
+					<button type="button" ng-click="cancel()"
+					class="btn btn-warning pull-right btn-align-reg">
+					<i class="fa fa-times-circle"></i> Cancel
+				</button>
+					
+					<button  ng-click="saveEmployee()"
+						type="submit" class="btn btn-primary pull-right btn-align-reg">
+						<i class="fa fa-save"></i> Save
+					</button>
+					
+				
+				<button type="button" ng-show="isNewUser" ng-click="profile()" class="btn btn-primary pull-right btn-align-reg">
+				<i class="fa fa-pencil"></i> Go To Profile
+				</button>
+				<label><input type="checkbox"  ng-model="isAdmin" ng-change="admin()"> Admin</label>
+				 
+				
+				</div>
+			
+			</div>
+			
+				<table width="100%"
+				class="table-hover table-striped table table-bordered">
+				<tbody>
+					<tr>
+							<th>Emp ID</th>
+							<th>Name</th>
+							<th>DOB</th>
+							<th>Email</th>
+							<th>Phone</th>
+							<th>Mobile</th>
+						    <th class="width10">Edit</th>
+						    <th class="width10">Delete</th>
+					</tr>
+					<tr ng-repeat="editemployee in employeeslist| filter:search| startFrom:currentPage*pageSize | limitTo:pageSize">
+							<td>{{ editemployee.empId }}</td>
+							<td>{{ editemployee.firstName }} {{ editemployee.lastName }}</td>
+							<td>{{ editemployee.dob |date:'dd.MM.yyyy' }}</td>
+							<td>{{ editemployee.emailId }}</td>
+							<td>{{ editemployee.alternatePhone }}</td>
+							<td>{{ editemployee.mobile }}</td>
+						<td class="settings-edit"><a href="" ng-click="NoOfEmployees($index,editemployee)"><i
+								class="fa fa-edit"></i></a></td>
+						<td class="settings-delete"><a href="" ng-click="delEmployee(editemployee)"><i
+								class="fa fa-trash-o"></i></a></td>
+					</tr>
+					
+				</tbody>
+				
+			</table> 
+			 <button  class="btn btn-primary" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+        Previous
+    </button>
+    {{currentPage+1}}/{{numberOfPages()}}
+    <button   class="btn btn-primary" ng-disabled="currentPage >= employeeslist.length/pageSize - 1" ng-click="currentPage=currentPage+1">
+        Next
+    </button>
+</form>
+	
+</div>   
+	 
+
+	
+			
+					
+<!-- 	<div class="axim-profile-hldr-txt"  id="manageUsers" ng-show="!isEdit">
+		<div class="modal-body">
+			<div style="float: right; text-decoration: underline;">
+				<a href="" ng-click="NewUser()">Add New User</a>
+			</div>
+			<div class="radio  col-md-2">
+							<label><input type="radio" name="isMailing"
+								ng-value="1" id="optionsRadios1"
+								ng-model="isSearch" required>
+								Name</label>
+						</div>
+						<div class="radio col-md-2">
+
+							<label><input type="radio" name="isMailing"
+								ng-value="2" id="optionsRadios2"
+								ng-model="isSearch" required>
+								Id</label>
+						</div>
+						<div class="radio col-md-2">
+
+							<label><input type="radio" name="isMailing"
+								ng-value="3" id="optionsRadios3"
+								ng-model="isSearch" required>
+								Department</label>
+						</div>
+			<div>
+		
+				<input type="text" ng-show="isSearch == 1" ng-model="search.firstName" class="search-query"
+					style="width: 80px">
+				<input type="text" ng-show="isSearch == 2" ng-model="search.id" class="search-query"
+					style="width: 80px">
+				<input type="text" ng-show="isSearch == 3" ng-model="search.id" class="search-query"
+					style="width: 80px">		
+				<button type="submit" class="btn" ng-click="NoOfEmployees($index)">Search</button>
+				
+				<table width="100%"
+				class="table-hover table-striped table table-bordered"
+					style="margin-top: 30px;">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Name</th>
+							<th>DOB</th>
+							<th>Email</th>
+							<th>Phone</th>
+							<th>Mobile</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr
+							ng-repeat="editemployee in employeeslist| filter:search| startFrom:currentPage*pageSize | limitTo:pageSize">
+							<td>{{ editemployee.id }}</td>
+							<td>{{ editemployee.firstName }}</td>
+							<td>{{ editemployee.dob |date:'dd-MM-yyyy' }}</td>
+							<td>{{ editemployee.emailId }}</td>
+							<td>{{ editemployee.alternatePhone }}</td>
+							<td>{{ editemployee.mobile }}</td>
+							<td><a href=""
+								ng-click="NoOfEmployees($index,editemployee)">edit</a> | <a href=""
+								ng-click="delEmployee(editemployee)">delete</a></td>
+						</tr>
+					</tbody>
+				</table>
+				    <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+        Previous
+    </button>
+    {{currentPage+1}}/{{numberOfPages()}}
+    <button ng-disabled="currentPage >= employeeslist.length/pageSize - 1" ng-click="currentPage=currentPage+1">
+        Next
+    </button>
+			</div>
+		</div>
+	</div>
+	<div id="page-wrapper" ng-show="isEdit">
+			<div class="container incr-height">
+				<form name="myForm" class="form-horizontal" role="form"
+					id="validation-form" validate="validate">
+					<div class="align-cntr-reg">
+						<div class="col-md-12">
+						<div class="form-group">
+								<div class="col-lg-12">
+									<input type="hidden" id="userId" name="id" class="form-control"
+										ng-model="user.id" placeholder="id" 
+										autofocus>
+									</div>
+							</div>
+							<div class="form-group">
+								<div class="col-lg-12">
+									<input type="text" id="name" name="uname" class="form-control"
+										ng-model="user.username" placeholder="Username" required
+										autofocus>
+									<div class="asterik">*</div>
+									{{userMessage}}
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-lg-12">
+									<input type="email" id="name" name="input" class="form-control"
+										ng-model="employee.emailId" placeholder="Email ID" required>
+									<div class="asterik">*</div>
+									<span ng-show="myForm.input.$error.email">This is not a
+										official email.</span>
+								</div>
+
+							</div>
+							<div class="form-group">
+								<div class="col-lg-12">
+									<input type="password" id="email" name="pass"
+										class="form-control" ng-model="user.password"
+										placeholder="Password" ng-minlength="4" required>
+									<div class="asterik">*</div>
+									<span ng-show="myForm.pass.$error.minlength">minimum 4
+										chars</span>
+								</div>
+
+							</div>
+							<div class="form-group">
+								<div class="col-lg-12">
+									<input type="password" name="repeatPassword" id="email"
+										class="form-control" placeholder="Repeat password"
+										ng-model="user.repeatPassword" placeholder="Confirm Password"
+										required>
+									<div class="asterik">*</div>
+									<div ng-blur="">{{pwd}}</div>
+								</div>
+
+							</div>
+							<div class="form-group">
+								<div class="col-lg-12">
+									<input type="text" id="name" name="f_name" class="form-control"
+										ng-model="employee.firstName" placeholder="First Name"
+										required>
+									<div class="asterik">*</div>
+								</div>
+
+							</div>
+							<div class="form-group">
+								<div class="col-lg-12">
+									<input type="text" id="name" name="l_name" class="form-control"
+										ng-model="employee.lastName" placeholder="Last Name" required>
+									<div class="asterik">*</div>
+								</div>
+							</div>
+							/.form-group
+
+							<div class="form-group">
+								<div class="col-lg-12">
+									<div class="input-group">
+										<input type="text" name="dob"  
+											placeholder="Date of birth" class="form-control"
+											ng-model="employee.dob" jqdatepicker required/> <span
+											ng-show="myForm.dob.$error.required"></span><span 
+											class="input-group-addon">&nbsp;<i
+											class="fa fa-calendar fa-fw"></i></span>
+									</div>
+									<div class="asterik">*</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+							<a class="pull-right" href="" ng-click="profile()" ng-show="isNewUser">Go To Profile</a>
+								<div class="col-md-8 col-xs-8 col-sm-8 col-lg-8 pull-right">
+									<button class="btn btn-primary pull-right btn-align-reg"
+										type="submit" ng-click="saveEmployee()"
+										ng-enabled="myForm.$valid">
+										<i class="fa fa-pencil"></i> Add
+									</button>
+									<label><input type="checkbox"  ng-model="isAdmin" ng-change="admin()">Admin</label>
+
+									<button class="btn btn-warning pull-right"
+										type="button" ng-click="cancel()">
+										<i class="fa fa-times-circle"></i> Cancel
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+
+		</div>
+</div>     -->

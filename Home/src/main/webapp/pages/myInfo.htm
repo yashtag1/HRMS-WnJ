@@ -1,0 +1,28 @@
+<div id="wrapper"> 
+  
+ 
+  <div id="page-wrapper">
+    <div class="container incr-height"> 
+      <!--Start Content -->
+      <div style="width:8%; float:left; margin-left:9%;"> <!-- required for floating --> 
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs tabs-left padding-right0 profile-tab">
+          <li id="myJobs"><a ui-sref=".myJobs" data-toggle="tab" class="bordertop0"  data-placement="left" data-original-title="My Jobs"><img src="../assets/images/job-details.png" width="50" height="34"></a></li>
+          <li id="benfEli"><a ui-sref=".benefitEligibility" data-toggle="tab" class="borderbtm0" data-placement="left" title="" data-original-title="Benefit Eligibility"><img src="../assets/images/leave-img1.png"
+							width="45" height="61"></a></li>
+        </ul>
+      </div>
+      <div class="col-xs-9"> 
+        <!-- Tab panes -->
+       <div class="tab-content">
+          <div ui-view></div>
+        </div>
+         
+        </div>
+      </div>
+      
+      <!--End Content --> 
+    </div>
+    <!-- /#container --> 
+  </div>
+  <!-- /#page-wrapper --> 

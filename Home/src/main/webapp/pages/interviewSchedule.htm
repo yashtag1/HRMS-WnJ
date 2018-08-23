@@ -1,0 +1,128 @@
+<div class="tab-pane active fade in" id="schedule">
+
+	<form validate="validate" id="" role="form"
+		class="form-horizontal col-md-9 ng-pristine ng-invalid ng-invalid-required"
+		name="myForm">
+	<fieldset>
+		<div class="prof-tab-title col-md-12 pull-left padding-zero"><div class="title-font pull-left">Interview Schedule <span class="add-link" ng-click="addDetails()"><a href="" id="addDetails">[ Add <i class="fa fa-plus-circle"></i> ]</a></span>
+		</div>
+               <div class="subnavbar pull-right">
+                  <ul class="nav pull-right">
+                    <li class="dropdown">
+				<button class="btn btn-primary pull-right dropdown-toggle search-fltr" data-toggle="dropdown" type="button"><i class="fa 
+
+				fa-filter"></i></button> 
+                <ul class="dropdown-menu pull-right search-dd search-query drp-dwn-align">
+               	
+				<li><label>&nbsp;<input type="radio" name="isSearch" ng-value="1"
+				id="optionsRadios1" ng-model="isSearch" required> Job Title</label></li>
+                    <li><label>&nbsp;<input type="radio" name="isSearch" ng-value="2"
+				id="optionsRadios1" ng-model="isSearch" required>Time</label></li>
+                </ul>                
+                	</li>
+                  </ul>
+				</div>
+				 <div class="col-md-4 pull-right search-bx padding-zero">
+                <input class="form-control search-query" type="text" ng-show="isSearch== 1" placeholder="Search JobTitle"
+				ng-model="search.jobTitle">
+				
+				 <input class="form-control search-query" type="text"
+				ng-show="isSearch== 2" placeholder="Search Time" ng-model="search.timeframe">
+
+			<input class="form-control" type="text"  name="" placeholder="Search" ng-hide="isSearch== 1 || isSearch== 2">
+                </div>
+              </div>		 
+		
+			<div class="col-lg-5 padding-zero" id="addForm" style="display: none">
+		
+				<label for="" class="col-md-6 padding-zero">Candidate name</label> <input
+					type="text" name="firstName" class="form-control"
+					ng-model="jobCandidate.firstName" required>
+				<br> 
+				
+				<label for="" class="col-md-6 padding-zero">Hiring Manager</label> <select
+					id="type" name="jobTitle" class="form-control"
+					ng-model="jobCandidate.jobVacancy" required
+					ng-options="type as type.jobTitle for type in jobTitleList">
+					<option class="" value="" ng-selected="selected">Select</option>
+				</select>
+				<br> 
+				
+				<label for="" class="col-md-6 padding-zero">Rounds</label> <select
+					id="type" name="jobTitle" class="form-control" 
+					ng-model="jobCandidate.jobCandidateStatus" required
+					ng-options="type as type.status for type in status">
+					<option class="" value="" ng-selected="selected">Select</option>
+				</select>
+				<br>
+				
+				<label for="" class="col-md-6 padding-zero">Rounds Type</label> <select
+					id="type" name="jobTitle" class="form-control" 
+					ng-model="jobCandidate.jobCandidateStatus" required
+					ng-options="type as type.status for type in status">
+					<option class="" value="" ng-selected="selected">Select</option>
+				</select>
+				<br>
+			
+				<label for="" class="col-md-8 padding-zero">Scheduled Date/Time</label>
+				<div class="col-md-12 padding-zero">
+				<div class="input-group">
+							<input type="text" id="datepicker" ng-model="jobCandidate.date" class="form-control ng-pristine ng-invalid ng-invalid-required" placeholder="Scheduled Date" name="date" required>
+							<span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
+				</div>
+				</div>
+				<br>
+				
+				<div
+					class="col-md-12 col-xs-12 col-sm-12 col-lg-12 padding-zero margin-top15 button-align">
+					<button type="button" ng-click="cancel()"
+						class="btn btn-warning pull-right btn-align-reg">
+						<i class="fa fa-times-circle"></i> Cancel
+					</button>
+					<button ng-click="addCandidate()" type="submit"
+						class="btn btn-primary pull-right">
+						<i class="fa fa-save"></i> Save
+					</button>
+				</div>
+			</div>
+			<br>
+			<table width="100%"
+				class="table-hover table-striped table table-bordered">
+				<tbody>
+					<tr>
+						<th>Name</th>
+						<th>Hiring Manager</th>
+						<th>Rounds</th>
+						<th>Scheduled Date/Time</th>
+						<th>Edit</th>
+						<th>Delete</th>
+						
+					</tr>
+					<tr data-ng-repeat="candidate in candidateList| filter:search:strict | startFrom:currentPage*pageSize | limitTo:pageSize">
+						<td>{{candidate.firstName}}</td>
+						<td>{{candidate.emailId}}</td>
+						<td>{{candidate.phone}}</td>
+						<td>{{candidate.jobVacancy.jobTitle}}</td>
+						<td>{{candidate.date |date:'dd-MM-yyyy'}}</td>
+						<td>{{candidate.jobCandidateStatus.status}}</td>
+						<td class="settings-edit"><a href="" ng-click="editCandidate(candidate)"><i
+								class="fa fa-edit"></i></a></td>
+						<td class="settings-delete"><a href="" ng-click="delCandidate(candidate)"><i
+								class="fa fa-trash-o"></i></a></td>
+					</tr> 
+					
+				</tbody>
+			</table>
+			<button  class="btn btn-primary"  ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+        Previous
+    </button>
+    {{currentPage+1}}/{{numberOfPages()}}
+    <button  class="btn btn-primary" ng-disabled="currentPage >= candidateList.length/pageSize - 1" ng-click="currentPage=currentPage+1">
+        Next
+    </button>  
+ 
+ </fieldset>
+		
+	</form>
+
+</div>

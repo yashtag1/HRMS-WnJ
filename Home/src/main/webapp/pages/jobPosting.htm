@@ -1,0 +1,44 @@
+
+<div id="wrapper">
+
+	<!--Start Header -->
+
+	<!--End Header -->
+
+	<div id="page-wrapper">
+		<div class="container incr-height">
+			<!--Start Content -->
+			<div style="width: 8%; float: left; margin-left: 9%;">
+				<!-- required for floating -->
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs tabs-left padding-right0 profile-tab">
+					<li id="posting"><a ui-sref=".jobVacancy" data-toggle="tab" data-placement="left" data-original-title="Job Posting" 
+						class="bordertop0"><img src="../assets/images/job-posting-icon.png"
+							width="55" height="61"></a></li>
+				</ul>
+				<ul class="nav nav-tabs tabs-left padding-right0 profile-tab">
+					<li id="feedback"><a ui-sref=".interviewFeedback" data-toggle="tab" data-placement="left" data-original-title="Interview Feedback" 
+						class="borderbtm0"><img src="../assets/images/profile-img1.png"
+							width="70" height="61"></a></li>
+				</ul>
+				
+			</div>
+
+			<div class="col-xs-9">
+				<!-- Tab panes -->
+				<div class="tab-content">
+					<div ui-view></div>
+				</div>
+			</div>
+
+			<!--End Content -->
+		</div>
+		<!-- /#container -->
+	</div>
+	<!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+
+

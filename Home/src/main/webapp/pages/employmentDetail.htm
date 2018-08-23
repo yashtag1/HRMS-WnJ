@@ -1,0 +1,163 @@
+
+<div class="tab-pane active fade in" id="employmentDetail">
+
+	<form validate="validate" id="" role="form"
+		class="form-horizontal col-md-9 ng-pristine ng-invalid ng-invalid-required"
+		name="myForm">
+<!-- 		<div class="prof-tab-title">
+			Job Details <span class="add-link"><a href="" id="addDetails">[
+					Add <i class="fa fa-plus-circle"></i> ]
+			</a></span>
+			<div class="input-group col-md-5 pull-right search-bx">
+				<input type="text" class="form-control" placeholder="Search">
+				<span class="input-group-btn">
+					<button class="btn btn-default search-style" type="button">
+						<i class="fa fa-search"></i>
+					</button>
+				</span>
+			</div>
+		</div>
+-->
+
+			<div class="prof-tab-title col-md-12 pull-left padding-zero"><div class="title-font pull-left">Job Details <span class="add-link" ng-click="addDetails()"><a href="" id="addDetails">[ Add <i class="fa fa-plus-circle"></i> ]</a></span>
+</div>
+               <div class="subnavbar pull-right">
+                  <ul class="nav pull-right">
+                    <li class="dropdown">
+				<button class="btn btn-primary pull-right dropdown-toggle search-fltr" data-toggle="dropdown" type="button"><i class="fa 
+
+fa-filter"></i></button> 
+                <ul class="dropdown-menu pull-right search-dd search-query drp-dwn-align">
+               	<!-- <li><a href="#" data-original-title="" title="" name="isSearch" ng-model="isSearch" ng-value="1">Job Title</a></li>
+                <li><a href="#" data-original-title="" title="" name="isSearch" ng-model="isSearch" ng-value="2">Employee Name</a></li>
+                <li><a href="#" data-original-title="" title="" name="isSearch" ng-model="isSearch" ng-value="3">Department</a></li>  -->
+                
+                    <li><label>&nbsp;<input type="radio" name="isSearch" ng-value="1"
+				id="optionsRadios1" ng-model="isSearch" required> Job Title</label></li>
+                    <li><label>&nbsp;<input type="radio" name="isSearch" ng-value="2"
+				id="optionsRadios1" ng-model="isSearch" required> Employee Name</label></li>
+                    <li><label>&nbsp;<input type="radio" name="isSearch" ng-value="3"
+				id="optionsRadios1" ng-model="isSearch" required> Department</label></li>  
+                </ul>                
+                	</li>
+                  </ul>
+				</div>
+				 <div class="col-md-4 pull-right search-bx padding-zero">
+                <input class="form-control search-query" type="text" ng-show="isSearch== 1" placeholder="Search JobTitle"
+				ng-model="search.jobTitle">
+				
+				 <input class="form-control search-query" type="text"
+				ng-show="isSearch== 2" placeholder="Search EmpName" ng-model="search.employeeByEmployee">
+				
+				<input class="form-control search-query" type="text"
+				ng-show="isSearch== 3" placeholder="Search Department" ng-model="search.department">
+
+				<input class="form-control" type="text"  name="" placeholder="Search" ng-hide="isSearch== 1 || isSearch== 2 || isSearch== 3 ">
+                </div>
+              </div>		
+		
+	
+
+			<div class="col-lg-5 padding-zero" id="addForm" style="display: none">
+			
+				<label for="" class="col-md-9 padding-zero">Employee
+					</label><input id="type" name="jobEmployee" class="form-control"
+					ng-model="employment.employeeByEmployee" required
+					typeahead="type as type.firstName +'&nbsp;'+ type.lastName for type in employees |filter:{firstName:$viewValue}">
+					<br>
+				
+				<label for="" class="col-md-9 padding-zero">Employee id
+					</label><input id="type" name="jobEmployee" class="form-control"
+					ng-model="employment.employeeByEmployee.empId" value="{{employment.employeeByEmployee.empId}}"
+					ng-readonly="true" required>
+					<br>
+					
+				<label for="" class="col-md-6 padding-zero">Job title</label> <select
+					id="type" name="jobTitle" class="form-control"
+					ng-model="employment.jobTitle" required
+					ng-options="type as type.title for type in jobs">
+					<option class="" value="" ng-selected="selected">Select</option>
+				</select><br> 
+				
+				<label for="" class="col-md-6 padding-zero">Department</label>
+				<select id="type" name="jobDepartment" class="form-control"
+					ng-model="employment.department" required
+					ng-options="type as type.name for type in departments">
+					<option class="" value="" ng-selected="selected">Select</option>
+				</select><br> 
+				
+				<label for="" class="col-md-15 padding-zero">Date of joining</label><div class="input-group">
+					<input type="text" name="dob"  class="form-control"
+				     ng-model="employment.startDate" jqdatepicker required/> <span
+					ng-show="myForm.dob.$error.required"></span><span 
+					class="input-group-addon">&nbsp;<i
+					class="fa fa-calendar fa-fw"></i></span>
+					</div><br>
+				
+				 <label for="" class="col-md-9 padding-zero" ng-hide="employment.band.id=='20'">Reporting
+					Manager</label><input id="type" name="jobEmployee" class="form-control"
+					ng-model="employment.employeeByReporting" ng-hide="employment.band.id=='20'"required
+					typeahead="type as type.firstName +'&nbsp;'+ type.lastName for type in reporting() |filter:{firstName:$viewValue}">
+					<br ng-hide="employment.band.id=='20'">
+				
+				 <label for="" class="col-md-6 padding-zero">Status</label>
+				<select id="type" name="employmentStatus" class="form-control"
+					ng-model="employment.employmentStatus" required
+					ng-options="type as type.status for type in empStatus">
+					<option class="" value="" ng-selected="selected">Select</option>
+				</select><br>
+				<div
+					class="col-md-12 col-xs-12 col-sm-12 col-lg-12 padding-zero button-align">
+					<button type="button" ng-click="cancel()"
+						class="btn btn-warning pull-right btn-align-reg">
+						<i class="fa fa-times-circle"></i> Cancel
+					</button>
+					<button ng-click="addEmployment()" type="submit"
+						class="btn btn-primary pull-right">
+						<i class="fa fa-save"></i> Save
+					</button>
+				</div>
+			</div>
+			<br>
+			<table width="100%"
+				class="table-hover table-striped table table-bordered">
+				<tbody>
+					<tr>
+						<th>Employee</th>
+						<th>Joining date</th>
+						<th>Job title</th>
+						<th>Department</th>
+						<th>Band</th>
+						<th>Reporting Manager</th>
+						<th>Status</th>
+						<th class="width10">Edit</th>
+						<th class="width10">Delete</th>
+					</tr>
+					<tr data-ng-repeat="employment in employmentList| filter:search:strict | startFrom:currentPage*pageSize | limitTo:pageSize">
+						<td>{{employment.employeeByEmployee.firstName}} {{employment.employeeByEmployee.lastName}}</td>
+						<td>{{employment.startDate |date:'dd.MM.yyyy' }}</td>
+						<td>{{employment.jobTitle.title}}</td>
+						<td>{{employment.department.name}}</td>
+						<td>{{employment.jobTitle.band.name}}</td>
+						<td>{{employment.employeeByReporting.firstName}} {{employment.employeeByReporting.lastName}}</td>
+						<td>{{employment.employmentStatus.status}}</td>
+						<td class="settings-edit"><a href="" ng-click="editEmployment(employment)"><i
+								class="fa fa-edit"></i></a></td>
+						<td class="settings-delete"><a href="" ng-click="delEmployment(employment)"><i
+								class="fa fa-trash-o"></i></a></td>
+					</tr>
+					
+				</tbody>
+			</table>
+			<button  class="btn btn-primary"  ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+        Previous
+    </button>
+    {{currentPage+1}}/{{numberOfPages()}}
+    <button  class="btn btn-primary" ng-disabled="currentPage >= employmentList.length/pageSize - 1" ng-click="currentPage=currentPage+1">
+        Next
+    </button>
+
+		
+	</form>
+
+</div>

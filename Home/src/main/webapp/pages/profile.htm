@@ -1,0 +1,222 @@
+ <div ng-switch on="loginData" class="tab-pane active fade in" id="profile" ng-init="profileImage()">
+ 
+<div class="prof-tab-title"><div class="title-font">Profile <span class="add-link" ng-click="editProfile()"><a href="" >[ Edit <i class="fa fa-edit"></i> ]</a></span></div></div>
+
+ <div ng-switch-when="true" class="col-lg-12 padding-zero"  ng-init="loadImage()">
+            <form validate="validate" id="validation-form" role="form" class="form-horizontal col-md-9 tab-cont-align" name="myForm" ng-submit="updateEmployee()">
+          
+  <div id="dropTarget" border: 1px #ccc solid; padding: 10px;" droppable>
+   <img id="image1" style="height: 150ps; width: 130px;" src=""/> 
+  
+  <div class="img-upload">Drop your photo here</div>
+
+</div>
+
+<output id="filesInfo" class="pull-right">
+<!-- <img style="height: 150ps; width: 130px;" src=""/> -->
+</output> 
+          
+  <fieldset>
+  
+<!-- drag & drop start     
+  <div class="dropbox" ng-class="dropbox" droppable drop="handleDrop()">
+<img alt="" src="" id="image">
+</div>
+    <div class="item" id="item1" draggable></div>-->
+      <!-- drag & drop end -->
+      
+      <!-- input name="imagefile[]" type="file" id="takePictureField" accept="image/*" onchange="angular.element(this).scope().uploadPhotos()" /-->
+     
+
+      <!-- 
+<form id="uploadImageForm" enctype="multipart/form-data">
+    <input id="name" value="#{name}" />
+    ... a few more inputs ... 
+</form>-->
+<br>
+<div style="display: none;" class="form-group">
+					<label for="name" class="col-lg-3">Emp id</label>
+					<div class="col-lg-8">
+						<input type="text" id="id" name="empId" class="form-control ng-pristine ng-valid ng-valid-required"
+							ng-model="employee.id" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-lg-8">
+						<input type="text"  ng-model="employee.firstName" placeholder="First name" class="form-control ng-pristine ng-valid ng-valid-required" name="f_name" id="name" required >
+					</div>
+					<div ng-show="myForm.f_name.$error.required" class="asterik">
+						 *
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-lg-8">
+						<input type="text" ng-model="employee.lastName" class="form-control ng-pristine ng-valid" placeholder="Last name" name="l_name" id="name">
+					</div>
+					<div ng-show="myForm.l_name.$error.required" class="asterik">
+						 *
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-md-8">
+						<div class="input-group">
+							<input type="text" ng-model="employee.dob" class="form-control ng-pristine ng-invalid ng-invalid-required" placeholder="Date of birth" name="dob" jqdatepicker value=valueA  required>
+							<span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
+						</div>
+					</div>
+					<div ng-show="myForm.dob.$error.required" class="asterik">
+						*
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-lg-8">
+					<div class="radio pull-left col-md-3">
+						<label><input type="radio" name="gender" value="Male" class="ng-pristine ng-valid ng-invalid-required"  id="optionsRadios1" ng-model="employee.gender" required> Male </label>
+					</div>
+					<div class="radio pull-left col-md-3">
+						<label><input type="radio" name="gender" value="Female" class="ng-pristine ng-valid ng-invalid-required"  id="optionsRadios2"	ng-model="employee.gender" required> Female </label>
+          		</div>
+				</div>	
+				<div ng-show="myForm.gender.$error.required" class="asterik">*</div>										
+				</div>
+				<div class="form-group">
+					<div class="col-lg-8">
+						<div class="radio pull-left col-md-3">
+							<label><input type="radio" ng-model="employee.maritalStatus" id="optionsRadios1" value="Single" class="ng-pristine ng-valid ng-invalid-required" name="maritalStatus" required> Single </label>
+						</div>
+						<div class="radio pull-left col-md-3">
+							<label><input type="radio" ng-model="employee.maritalStatus" id="optionsRadios2" value="Married" class="ng-pristine ng-valid ng-invalid-required" name="maritalStatus" required> Married </label>
+					</div>
+					</div>
+					<div ng-show="myForm.maritalStatus.$error.required" class="asterik">
+						*
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-lg-8">
+						<input type="text" required ng-model="employee.panNo" class="form-control ng-pristine ng-invalid ng-invalid-required" placeholder="Pan number" name="pan" id="name">
+					</div>
+					<div ng-show="myForm.pan.$error.required" class="asterik">
+						 *
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-lg-8">
+						<input name="bloodGroup" class="form-control ng-pristine ng-invalid ng-invalid-required"
+							ng-model="employee.bloodGroup" required placeholder="Blood group" 
+							typeahead="pc as pc.groupName for pc in bloodGroups | filter:{groupName:$viewValue}">
+					</div>
+					<div ng-show="myForm.bloodGroup.$error.required" class="asterik">
+						 *
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-lg-8">
+						<input type="text" ng-pattern=" /^[(]{0,1}[0-9]{3}[)\.\- ]{0,1}[0-9]{3}[\.\- ]{0,1}[0-9]{4}$/" ng-model="employee.mobile" class="form-control ng-pristine ng-valid-number ng-valid-pattern ng-invalid ng-invalid-required" placeholder="Mobile" name="mobile" id="mobile" required>
+						<div>
+							<span ng-show="myForm.mobile.$error.pattern" class="ng-hide"><span class="message">Enter 10 digit Valid Mobile No.</span></span>
+						</div> 
+					</div>
+					<div ng-show="myForm.mobile.$error.required" class="asterik">
+						 *
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-lg-8">
+						<input type="text" ng-pattern=" /^[(]{0,1}[0-9]{3}[)\.\- ]{0,1}[0-9]{3}[\.\- ]{0,1}[0-9]{4}$/" ng-model="employee.alternatePhone" class="form-control ng-pristine ng-valid-number ng-invalid ng-invalid-required" placeholder="Alt mobile" name="altcontact" id="altcontact" required>
+					<div>
+							<span ng-show="myForm.altcontact.$error.pattern" class="ng-hide"><span class="message">Enter 10 digit Valid Mobile No.</span></span>
+						</div>
+						</div> 
+					<div ng-show="myForm.altcontact.$error.required" class="asterik">
+						 *
+					</div>
+				</div>
+				<!-- /.form-group -->
+				<div class="form-group">
+					<div class="col-lg-8">
+						<button ng-click="cancel()" class="btn btn-warning pull-right"><i class="fa fa-times-circle"></i> Cancel</button> &nbsp;&nbsp; <button style="margin: 0 5px;" class="btn btn-primary pull-right"><i class="fa fa-save"></i> Save </button>
+					</div>
+				</div>
+			</fieldset>
+	
+            <!-- end profile -->
+		</form>
+  </div>
+            <div ng-switch-when="false" class=""
+		style="background-color: #fff;">
+		
+		<form name="myForm" class="form-horizontal col-md-7" role="form"
+			id="validation-form" validate="validate">
+			<fieldset>
+				<div>
+				<img alt="" src="" id="image" style="width:130px; height:150px;"/>	
+				</div><br>	
+			
+				<div class="form-group" style="display: none;">
+					<label class="col-lg-3" for="name">Emp id</label>
+					<div class="col-lg-8">
+						<div>{{employee.id}}</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-lg-3" for="name">First name</label>
+					<div class="col-lg-8">
+						<div>{{employee.firstName}}</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-lg-3" for="name">Last name</label>
+					<div class="col-lg-8">
+						<div>{{employee.lastName}}</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-3">Date of birth</label>
+					<div class="col-md-8">
+						<div class="input-group">
+							<div>{{employee.dob | date:"dd-MM-yyyy"}}</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-lg-3">Gender</label>
+					<div class="col-lg-8">
+						<div>{{employee.gender}}</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-lg-3" for="name">Marital status</label>
+					<div class="col-lg-8">
+						<div>{{employee.maritalStatus}}</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-lg-3" for="name">Pan number</label>
+					<div class="col-lg-8">
+						<div>{{employee.panNo}}</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-lg-3" for="name">Blood group</label>
+					<div class="col-lg-8">
+						<div>{{employee.bloodGroup.groupName}}</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-lg-3" for="name">Mobile</label>
+					<div class="col-lg-8">
+						<div>{{employee.mobile}}</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-lg-3" for="name">Alt contact</label>
+					<div class="col-lg-8">
+						<div>{{employee.alternatePhone}}</div>
+					</div>
+				</div>
+				<br>
+			</fieldset>
+		</form>
+	</div>
+ </div>

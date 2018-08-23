@@ -1,0 +1,31 @@
+
+<div id="wrapper"> 
+  
+ 
+  <div id="page-wrapper">
+    <div class="container incr-height"> 
+      <!--Start Content -->
+      <div style="width:8%; float:left; margin-left:9%;"> <!-- required for floating --> 
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs tabs-left padding-right0 profile-tab">
+          <li id="benfcat"><a ui-sref=".benefitCategory" data-toggle="tab" class="bordertop0" data-placement="left" title="" data-original-title="Benefit category"><img src="../assets/images/benf-cat.png" width="41" height="40"></a></li>
+          <li id="benftype"><a ui-sref=".benefitType" data-toggle="tab" class="borderbtm0"  data-placement="left" data-original-title="Benefit Type"><img src="../assets/images/add-ben.png" width="53" height="45"></a></li>
+        </ul>
+      </div>
+      <div class="col-xs-9"> 
+        <!-- Tab panes -->
+       <div class="tab-content">
+          <div ui-view></div>
+        </div>
+         
+        </div>
+      </div>
+      
+      <!--End Content --> 
+    </div>
+    <!-- /#container --> 
+  </div>
+  <!-- /#page-wrapper --> 
+  
+
+

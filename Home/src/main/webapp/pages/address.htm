@@ -1,0 +1,311 @@
+
+<div ng-switch on="isAddrSaved" class="tab-pane active fade in"
+	id="address" ng-init="setEmployee()">
+	<div class="prof-tab-title">
+		<div class="title-font">
+			Address<span class="add-link" ng-click="editAddr()"><a href="">[
+					Edit <i class="fa fa-edit"></i> ]
+			</a></span>
+		</div>
+	</div>
+	<div ng-switch-when="true" class="col-lg-12">
+		<form validate="validate" id="validation-form" role="form"
+			class="form-horizontal col-md-9 ng-scope ng-pristine ng-invalid ng-invalid-required tab-cont-align"
+			name="myForm" ng-submit="saveAddress1()">
+			<fieldset>
+				<div class="form-group">
+					<label for="name" class="col-lg-12">Permanent&nbsp;Address</label>
+					<div class="col-lg-8">
+						<input type="hidden" name="id"
+							ng-model="employee.addressByPermanent.id">
+
+						<div class="form-group">
+							<div class="col-lg-11">
+								<input type="text" name="pline1" placeholder="Line1"
+									class="form-control ng-pristine ng-valid ng-valid-required"
+									ng-model="employee.addressByPermanent.line1" required>
+							</div>
+							<div ng-show="myForm.pline1.$error.required" class="asterik">*</div>
+
+						</div>
+
+						<div class="form-group">
+							<div class="col-lg-11">
+								<input type="text" name="pline2" placeholder="Line2"
+									class="form-control"
+									ng-model="employee.addressByPermanent.line2" required>
+							</div>
+							<div ng-show="myForm.pline2.$error.required" class="asterik">*</div>
+						</div>
+
+						<div class="form-group">
+							<div class="col-lg-11">
+								<input type="text" name="pcity" placeholder="City"
+									class="form-control"
+									ng-model="employee.addressByPermanent.city" required>
+							</div>
+							<div ng-show="myForm.pcity.$error.required" class="asterik">*</div>
+						</div>
+
+						<!-- <input type="text" id="name" name="country" class="form-control" ng-model="employee.country.groupName"> -->
+						<div class="form-group">
+							<div class="col-lg-11">
+								<select name="country" class="form-control"
+									ng-model="pCtry.name" required
+									ng-options="co.name for co in Country">
+									<option value="">-- Choose Country --</option>
+								</select>
+							</div>
+							<div ng-show="myForm.country.$error.required" class="asterik">*</div>
+						</div>
+
+						<!-- <input type="text" id="name" name="state" class="form-control" ng-model="employee.state.groupName"> -->
+						<div class="form-group">
+							<div class="col-lg-11">
+								<select name="pstate" class="form-control"
+									ng-model="employee.addressByPermanent.state" required
+									ng-options="st.stateName for st in filteredPStates()">
+									<option value="">-- Choose State --</option>
+								</select>
+							</div>
+							<div ng-show="myForm.pstate.$error.required" class="asterik">*</div>
+						</div>
+
+						<div class="form-group">
+							<div class="col-lg-11">
+								<input type="text" name="ppin" placeholder="Pin"
+									class="form-control" ng-model="employee.addressByPermanent.pin"
+									required>
+							</div>
+							<div ng-show="myForm.ppin.$error.required" class="asterik">*</div>
+						</div>
+
+
+					</div>
+
+				</div>
+				<div>
+					<input type="checkbox" name="check"
+						ng-model="pAAndRASame.condition"
+						ng-change="check(pAAndRASame.condition)" />Same as Permanent
+					Address
+				</div>
+				</br>
+
+				<div class="form-group" ng-hide="pAAndRASame.condition">
+					<label for="name" class="col-lg-12">Residential Address</label>
+					<div class="col-lg-8">
+
+						<div class="form-group">
+							<div class="col-lg-11">
+								<input type="text" name="line1" placeholder="Line1"
+									class="form-control"
+									ng-model="employee.addressByResidential.line1" required>
+							</div>
+							<div ng-show="myForm.line1.$error.required" class="asterik">*</div>
+						</div>
+
+						<div class="form-group">
+							<div class="col-lg-11">
+								<input type="text" name="line2" placeholder="Line2"
+									class="form-control"
+									ng-model="employee.addressByResidential.line2" required>
+							</div>
+							<div ng-show="myForm.line2.$error.required" class="asterik">*</div>
+						</div>
+
+
+						<div class="form-group">
+							<div class="col-lg-11">
+								<input type="text" name="city" placeholder="City"
+									class="form-control"
+									ng-model="employee.addressByResidential.city" required>
+							</div>
+							<div ng-show="myForm.city.$error.required" class="asterik">*</div>
+						</div>
+
+						<!-- <input type="text" id="name" name="countryname" class="form-control" ng-model="employee.country.groupName"> -->
+						<div class="form-group">
+							<div class="col-lg-11">
+								<select name="countryname" class="form-control"
+									ng-model="tCtry.name" required
+									ng-options="cou.name for cou in Country">
+									<option value="">-- Choose Country --</option>
+								</select>
+							</div>
+							<div ng-show="myForm.countryname.$error.required" class="asterik">*</div>
+						</div>
+
+						<!-- <input type="text" id="name" name="statename" class="form-control" ng-model="employee.state.groupName"> -->
+						<div class="form-group">
+							<div class="col-lg-11">
+								<select name="state" class="form-control"
+									ng-model="employee.addressByResidential.state" required
+									ng-options="sta.stateName for sta in filteredTStates()">
+									<option value="">-- Choose State --</option>
+								</select>
+							</div>
+							<div ng-show="myForm.state.$error.required" class="asterik">*</div>
+						</div>
+
+						<div class="form-group">
+							<div class="col-lg-11">
+								<input type="text" name="pin" placeholder="Pin" id="pin"
+									class="form-control ng-pristine ng-valid-number ng-valid-pattern ng-invalid ng-invalid-required"
+									ng-model="employee.addressByResidential.pin" required>
+							</div>
+							<div ng-show="myForm.pin.$error.required" class="asterik">*</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="name" class="col-lg-12">Mailing Address</label>
+					<div class="col-lg-8">
+						<div class="radio pull-left col-md-2">
+							<label><input type="radio" name="isMailing"
+								ng-value="true" id="optionsRadios1"
+								ng-model="isMailing.condition" required>
+								Permanent&nbsp;Address</label>
+						</div>
+						&nbsp;&nbsp;
+						<div class="radio pull-right col-md-2"
+							ng-hide="pAAndRASame.condition">
+
+							<label><input type="radio" name="isMailing"
+								ng-value="false" id="optionsRadios2"
+								ng-model="isMailing.condition" required>
+								Residental&nbsp;Address</label>
+						</div>
+					</div>
+
+				</div>
+
+				</br>
+
+
+
+				<!-- /.form-group -->
+
+				<div class="form-group">
+					<div class="col-lg-8">
+						&nbsp;&nbsp;
+						<button type="button" ng-click="cancelSubmit()"
+							class="btn btn-warning pull-right">
+							<i class="fa fa-times-circle"></i> Cancel
+						</button>
+						<button style="margin: 0 5px;" ng-enabled="myForm.$valid"
+							type="submit" class="btn btn-primary pull-right">
+							<i class="fa fa-save"></i> Save
+						</button>
+					</div>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+	<div ng-switch-when="false" style="background-color: #fff;">
+		<form role="form"
+			class="form-horizontal col-md-9 ng-scope tab-cont-align"
+			name="myForm">
+			<fieldset>
+				<div class="form-group">
+					<label for="name" class="col-lg-15">Permanent&nbsp;Address</label>
+					<label for="name" class="col-lg-15"
+						ng-show="employee.addressByPermanent.id==employee.addressByMailing.id">(Mailing&nbsp;Address)</label>
+					<br>
+
+					<div class="form-group">
+						<label class="col-lg-2" for="name">Line1</label>
+						<div>{{employee.addressByPermanent.line1}}</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-lg-2" for="name">Line2</label>
+						<div>{{employee.addressByPermanent.line2}}</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-lg-2" for="name">City</label>
+						<div>{{employee.addressByPermanent.city}}</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-lg-2" for="name">Country</label>
+						<div>{{employee.addressByPermanent.state.country.name}}</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-lg-2" for="name">State</label>
+						<div>{{employee.addressByPermanent.state.stateName}}</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-lg-2" for="name">Pin</label>
+						<div>{{employee.addressByPermanent.pin}}</div>
+					</div>
+
+				</div>
+
+				<div class="form-group">
+					<label for="name" class="col-lg-15">Residential&nbsp;Address</label>
+					<label for="name" class="col-lg-15"
+						ng-hide="employee.addressByPermanent.id==employee.addressByMailing.id ||
+					 employee.addressByPermanent.id==employee.addressByResidential.id">(Mailing&nbsp;Address)</label>
+					<br>
+
+					<div class="form-group">
+						<label class="col-lg-2" for="name">Line1</label>
+						<div>{{employee.addressByResidential.line1}}</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-lg-2" for="name">Line2</label>
+						<div>{{employee.addressByResidential.line2}}</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-lg-2" for="name">City</label>
+						<div>{{employee.addressByResidential.city}}</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-lg-2" for="name">Country</label>
+						<div>{{employee.addressByResidential.state.country.name}}</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-lg-2" for="name">State</label>
+						<div>{{employee.addressByResidential.state.stateName}}</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-lg-2" for="name">Pin</label>
+						<div>{{employee.addressByResidential.pin}}</div>
+					</div>
+
+				</div>
+
+				<!-- <div class="form-group">
+					<label for="name" class="col-lg-12">Mailing&nbsp;Address</label>
+					<div class="col-lg-8">
+						
+						<div>{{employee.addressByMailing.line1}}</div>
+						<div>{{employee.addressByMailing.line2}}</div>
+						<div>{{employee.addressByMailing.city}}</div>
+						<div>{{employee.addressByMailing.state.country.name}}</div>
+						<div>{{employee.addressByMailing.state.stateName}}</div>
+						<div>{{employee.addressByMailing.pin}}</div>
+
+					</div>
+				</div> -->
+				<br>
+			</fieldset>
+		</form>
+
+	</div>
+</div>
+
+
+
+
+
+

@@ -1,0 +1,36 @@
+<div class="tab-pane active fade in" id="benefitEligiblity">
+				<div validate="validate" id="validation-form" role="form"
+					class="form-horizontal col-md-8 tab-cont-align" name="myForm">
+					<!-- start profile -->
+					<div class="prof-tab-title">
+						<div class="title-font">My Benefit Eligibility</div>
+					</div>
+
+
+					<div ng-show="benefits.length==0">There is no benefits to
+						show</div>
+
+					<div ng-hide="benefits.length==0">
+						<table width="100%"
+							class="table-hover table-striped table table-bordered">
+							<tr>
+								<th>Type</th>
+								<th>Eligibility</th>
+								<th>Year</th>
+
+							</tr>
+							<tr data-ng-repeat="benefit in benefits">
+								<td>{{benefit.name}}</td>
+								<td>{{benefit.value}}</td>
+								<td>{{benefit.year}}</td>
+
+							</tr>
+
+						</table>
+					</div>
+			</div>
+	</div>
+				
+			
+
+

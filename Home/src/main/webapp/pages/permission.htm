@@ -1,0 +1,62 @@
+<div class="col-lg-12" style="background-color: #fff;">
+	<h1 class="page-header">Permission Form</h1>
+	<form name="myForm" class="form-horizontal col-md-7" role="form"
+		id="validation-form" validate="validate"
+		ng-controller="permissionController">
+		<fieldset>
+
+			<div class="form-group">
+				<label class="col-md-3">I request permission on*</label>
+				<div class="col-md-8">
+					<div class="input-group">
+						<input id="datepickerpro" type="text" name="perm"
+							placeholder="Date" class="form-control" ng-model="employee.date"
+							required> <span ng-show="myForm.perm.$error.date"></span><span
+							class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-md-3">Time*</label>
+				<div class="col-md-8">
+					<div class="input-group">
+						<input id="time" type="text" name="timeFrom" placeholder="From"
+							class="form-control" ng-model="employee.from" required> <span
+							ng-show="myForm.from.$error.required"></span><span
+							class="input-group-addon">&nbsp;</span><input id="timeone"
+							type="text" name="timeTo" placeholder="To" class="form-control"
+							ng-model="employee.to" style="margin: 0 6px;" required>
+						<span ng-show="myForm.to.$error.required"></span><span class="input-group-addon"></span>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-3" for="name">Reasons*</label>
+				<div class="col-lg-8">
+					<textarea rows="4" cols="50" placeholder="Comments"
+						class="form-control" ng-model="employee.reason" required></textarea>
+
+				</div>
+
+			</div>
+			<!-- /.form-group -->
+			<br>
+			<div class="form-group">
+				<div class="col-lg-4"></div>
+				<div class="col-lg-7">
+					<button class="btn btn-success pull-right" type="submit"
+						ng-click="requestPermission()" ng-enabled="myForm.$valid"
+						style="margin: 0 5px;">
+						<i class="icon-ok"></i> Submit
+					</button>
+					&nbsp;&nbsp;
+					<button class="btn btn-default pull-right"
+						ng-click="cancelSubmit()">Cancel</button>
+				</div>
+			</div>
+
+		</fieldset>
+	</form>
+</div>
+

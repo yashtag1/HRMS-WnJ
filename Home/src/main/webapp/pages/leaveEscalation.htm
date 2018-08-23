@@ -1,0 +1,124 @@
+<div class="tab-pane active fade in" id="leaveEscalation">
+	<form validate="validate" id="validation-form" role="form"
+		class="form-horizontal col-md-12 tab-cont-align" name="myForm">
+	
+		<div class="prof-tab-title col-md-12 pull-left padding-zero"><div class="title-font pull-left">Escalated Leaves
+</div></div><br><br><br>
+ <div class="gridStyle" ng-grid="gridOptions"></div>
+ </form>
+</div>
+
+<div role="dialog" class="modal fade in" id="leaveReason"
+	data-backdrop="static">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button aria-hidden="true" data-dismiss="modal" class="close"
+					type="button">X</button>
+				<h4 class="modal-title">REASON</h4>
+			</div>
+			<div class="modal-body">{{reason}}</div>
+
+		</div>
+	</div>
+</div>
+
+<div role="dialog" class="modal fade in" id="rejectReason"
+	data-backdrop="static">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button aria-hidden="true" data-dismiss="modal" class="close"
+					type="button">X</button>
+				<h4 class="modal-title">REASON</h4>
+			</div>
+			<div class="modal-body">
+				<form id="myform" name="myform" ng-submit="rejectLeave(LeaveRequestEscalation)" validate>
+					<fieldset>
+						<textarea required="" ng-model="rejectReason" name="reason"
+							class="form-control ng-dirty ng-valid ng-valid-required"
+							placeholder="Comments" cols="50" rows="4"></textarea>
+
+						<div class="col-md-12 margin-top15">
+							<label for="" class="col-md-6"></label>
+							<div class="col-md-5">
+								<button class="btn btn-primary pull-right btn-align-reg"
+									type="submit"  ng-click="" value="Save">
+									<i class="fa fa-save"></i> Send
+								</button>
+							</div>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<div role="dialog" class="modal fade in" id="approve-msg"
+	data-backdrop="static">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button aria-hidden="true" data-dismiss="modal" class="close"
+					type="button"></button>
+				<h4 class="modal-title">Approval Reason</h4>
+			</div>
+			<div class="modal-body">
+				<form id="myform" name="myform" ng-submit="approval(LeaveRequestEscalation)" validate>
+					<fieldset>
+
+						 <div class="col-md-12">
+
+							<div class="col-md-5">
+
+								<input type="hidden" name="id" ng-model="LeaveRequestEscalation.leaveRequest">
+							</div>
+
+						</div>
+ 						
+ 						<div class="col-md-12 margin-top15">
+							<label for="" class="col-md-6">Reason</label>
+							<div class="col-md-5">
+
+						<textarea type="text" name="" class="form-control"
+					      ng-model="comments" required placeholder="Comments" cols="30" rows="4"></textarea> 
+					      
+					      <!-- <select id="" name="" class="form-control"
+						ng-model="comments" required
+						ng-options="reason.id as reason.name for reason in reason">
+						<option value="" ng-selected="selected">Select</option>
+					</select> -->
+					
+					</div>
+							
+						</div> 
+						
+						<div class="col-md-12 margin-top15">
+							<label for="" class="col-md-5"></label>
+							<div class="col-md-6">
+								<button class="btn btn-warning pull-right btn-align-reg"
+									data-dismiss="modal" ng-disabled="loading" ng-click="cancel()" type="button">
+									<i class="fa fa-times-circle"></i> Cancel
+								</button>
+							
+
+								<button style="margin: 0 5px;" ng-disabled="loading" 
+									class="btn btn-primary pull-right" type="submit" value="Save">
+									<i class="fa fa-save"></i><span data-ng-hide="loading">
+										Submit</span> <span data-ng-show="loading"> Submit<i
+										class="fa fa-spinner fa-spin"></i></span>
+								</button>
+							</div>
+						</div>
+
+					</fieldset>
+
+				</form>
+			</div>
+
+		</div>
+	</div>
+</div>
+

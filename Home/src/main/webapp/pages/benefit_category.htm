@@ -1,0 +1,179 @@
+
+<div class="tab-content">
+	<div class="tab-pane active fade in" id="benefitCategory">
+		<!-- start benefit category -->
+		<form validate="validate" id="" role="form"
+			class="form-horizontal col-md-9 ng-pristine ng-invalid ng-invalid-required"
+			name="myForm">
+			<!-- <div class="prof-tab-title">
+				Benefit Category <span class="add-link" ng-click="addCategory()"><a href=""
+					id="addDetails">[ Add <i class="fa fa-plus-circle"></i> ]
+				</a></span>
+				<div class="input-group col-md-5 pull-right search-bx">
+					<input type="text" class="form-control search-query"
+						placeholder="Search" ng-model="search.category"> <span
+						class="input-group-btn">
+						<button class="btn btn-default search-style" type="button">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</div> -->
+
+			<div class="prof-tab-title col-md-12 pull-left padding-zero">
+				<div class="title-font pull-left">
+					Benefit Category <span class="add-link" ng-click="addCategory()"><a
+						href="" id="addDetails">[ Add <i class="fa fa-plus-circle"></i>
+							]
+					</a></span>
+				</div>
+				<div class="subnavbar pull-right">
+					<ul class="nav pull-right">
+						<li class="dropdown">
+							<!-- <button
+								class="btn btn-primary pull-right dropdown-toggle search-fltr"
+								data-toggle="dropdown" type="button">
+								<i class="fa fa-filter"></i>
+							</button>  -->
+					<!-- <ul class="dropdown-menu pull-right search-dd">
+                    <li><a href="#" data-original-title="" title="">Employee ID</a></li>
+                    <li><a href="profile.html" data-original-title="" title="">Employee Name</a></li>
+                    <li><a href="#" data-original-title="" title="">Department</a></li>
+                    </ul>   -->  
+						</li>
+					</ul>
+				</div>
+				<div class="col-md-4 pull-right search-bx padding-zero">
+					<input class="form-control" type="text" name=""
+						placeholder="Search Category" ng-model="search.category">
+				</div>
+			</div>
+
+			<div class="col-lg-5 padding-zero" id="addForm" style="display: none">
+				<label for="" class="col-md-6 padding-zero">Benefit name</label> <input
+					class="form-control" type="text" name="addr"
+					ng-model="benefitCategory.category"><br>
+
+				<div
+					class="col-md-12 col-xs-12 col-sm-12 col-lg-12 padding-zero button-align">
+					<button type="button" ng-click="cancel()"
+						class="btn btn-warning pull-right btn-align-reg">
+						<i class="fa fa-times-circle"></i> Cancel
+					</button>
+					<button ng-click="addBenefit()" type="submit"
+						class="btn btn-primary pull-right">
+						<i class="fa fa-save"></i> Save
+					</button>
+				</div>
+			</div>
+			<table width="100%"
+				class="table-hover table-striped table table-bordered">
+				<tbody>
+					<tr>
+						<th>Benefit name</th>
+						<th class="width10">Edit</th>
+						<th class="width10">Delete</th>
+					</tr>
+					<tr
+						data-ng-repeat="benefit in benefitCategoryList | filter:search:strict">
+						<td>{{benefit.category}}</td>
+						<td class="settings-edit"><a href=""
+							ng-click="editBenefitCategory(benefit)"><i class="fa fa-edit"></i></a></td>
+						<td class="settings-delete"><a href=""
+							ng-click="deleteBenefitCategory(benefit)"><i
+								class="fa fa-trash-o"></i></a></td>
+					</tr>
+
+				</tbody>
+			</table>
+
+		</form>
+		<!-- end benefit category -->
+	</div>
+
+	<!-- <div class="prof-tab-title">Benefit Category</div>
+		<a href="#edit" data-toggle="modal">Add Benefit Category</a>
+
+
+
+		<div class="radio  col-md-2">
+			<label><input type="radio" name="isMailing" ng-value="1"
+				id="optionsRadios1" ng-model="isMailing" required> Category</label>
+		</div>
+
+
+		<div>
+
+			<input type="text" ng-show="isMailing== 1" placeholder="Search"
+				ng-model="search.category" class="search-query" style="width: 80px">
+			<button type="submit" ng-hide="isMailing== 1" class="btn">Search</button>
+
+			<table width="100%"
+				class="table-hover table-striped table table-bordered"
+				style="margin-top: 30px;">
+				<thead>
+					<tr>
+						<th>Category</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr
+						data-ng-repeat="benefit in benefitCategoryList | filter:search:strict| startFrom:currentPage*pageSize | limitTo:pageSize">
+
+						<td>{{benefit.category}}</td>
+						<td><a href="#edit" ng-click="editBenefitCategory(benefit)"
+							data-toggle="modal">Edit</a>| <a
+							ng-click="deleteBenefitCategory(benefit)">Delete</a></td>
+					</tr>
+				</tbody>
+			</table>
+			<button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+        Previous
+    </button>
+    {{currentPage+1}}/{{numberOfPages()}}
+    <button ng-disabled="currentPage >=  benefitCategoryList.length/pageSize - 1" ng-click="currentPage=currentPage+1">
+        Next
+    </button>
+		</div>
+		<div role="dialog" class="modal fade in" id="edit">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button aria-hidden="true" data-dismiss="modal" class="close"
+							type="button">X</button>
+						<h4 class="modal-title">Benefit Category</h4>
+					</div>
+					<div class="modal-body">
+						<fieldset>
+
+							<div class="col-md-12">
+
+								<div class="col-md-5">
+
+									<input type="hidden" name="id" ng-model="benefit.id">
+								</div>
+
+							</div>
+
+							<div class="col-md-12">
+								<label for="" class="col-md-6">Category</label>
+								<div class="col-md-5">
+									<input type="text" name="type" placeholder="Category"
+										class="form-control" ng-model="benefitCategory.category"
+										required>
+									<div>&nbsp;</div>
+									<button class="btn btn-success pull-right" type="submit"
+										ng-click="addBenefit()" value="Save">Save</button>
+
+								</div>
+							</div>
+						</fieldset>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+ -->

@@ -1,0 +1,107 @@
+<div class="tab-pane active fade in" id="referral">
+
+	<form validate="validate" id="" role="form"
+		class="form-horizontal col-md-9 ng-pristine ng-invalid ng-invalid-required"
+		name="myForm">
+
+<div class="prof-tab-title col-md-12 pull-left padding-zero"><div class="title-font pull-left">Employee Reference <span class="add-link" ng-click="addDetails()"><a href="" id="addDetails">[ Add <i class="fa fa-plus-circle"></i> ]</a></span>
+</div>
+               <div class="subnavbar pull-right">
+                  <ul class="nav pull-right">
+                    <li class="dropdown">
+				<button class="btn btn-primary pull-right dropdown-toggle search-fltr" data-toggle="dropdown" type="button"><i class="fa 
+
+fa-filter"></i></button> 
+                <ul class="dropdown-menu pull-right search-dd search-query drp-dwn-align">
+               	
+				<li><label>&nbsp;<input type="radio" name="isSearch" ng-value="1"
+				id="optionsRadios1" ng-model="isSearch" required> Job Title</label></li>
+                    <li><label>&nbsp;<input type="radio" name="isSearch" ng-value="2"
+				id="optionsRadios1" ng-model="isSearch" required>Priority</label></li>
+                </ul>                
+                	</li>
+                  </ul>
+				</div>
+				 <div class="col-md-4 pull-right search-bx padding-zero">
+                <input class="form-control search-query" type="text" ng-show="isSearch== 1" placeholder="Search JobTitle"
+				ng-model="search.jobTitle">
+				
+				 <input class="form-control search-query" type="text"
+				ng-show="isSearch== 2" placeholder="Search Time" ng-model="search.jobTimeframe">
+
+			<input class="form-control" type="text"  name="" placeholder="Search" ng-hide="isSearch== 1 || isSearch== 2">
+                </div> 
+              </div>		
+		
+			<div class="col-lg-5 padding-zero" id="addForm" style="display: none">
+			
+			<label for="" class="col-md-6 padding-zero">Candidate name</label> <input
+					type="text" name="firstName" class="form-control"
+					ng-model="jobCandidate.firstName" required>
+				<br> 
+				
+			<label for="" class="col-md-6 padding-zero">Job Title</label> <select
+					id="type" name="jobTitle" class="form-control"
+					ng-model="jobCandidate.jobVacancy" required
+					ng-options="type as type.jobTitle for type in jobTitleList">
+					<option class="" value="" ng-selected="selected">Select</option>
+				</select>
+			<br>  
+				
+			<label for="" class="col-md-6 padding-zero margin-top15">Resume</label> <input
+					type="text" name="resume" class="form-control"
+					ng-model="jobCandidate.resume" required>
+				<br>
+			
+				
+				<div
+					class="col-md-12 col-xs-12 col-sm-12 col-lg-12 padding-zero  margin-top15 button-align">
+					<button type="button" ng-click="cancel()" ng-disabled="loading"
+						class="btn btn-warning pull-right btn-align-reg">
+						<i class="fa fa-times-circle"></i> Cancel
+					</button>
+					<button ng-click="addVacancy()" ng-disabled="loading" type="submit" class="btn btn-primary pull-right">
+						<i class="fa fa-save"></i> <span data-ng-hide="loading">Send</span>
+						<span data-ng-show="loading"> Send<i class="fa fa-spinner fa-spin"></i> </span>
+					</button>
+					
+				</div>
+			</div>
+			<br>
+			<table width="100%"
+				class="table-hover table-striped table table-bordered">
+				<tbody>
+					<tr>
+						<th>Referred by</th>
+						<th>Candidate name</th>
+						<th>Job Title</th>
+						<th>Resume</th>
+					</tr>
+					<!--  <tr data-ng-repeat="vacancy in jobVacancyList | filter:search:strict | startFrom:currentPage*pageSize | limitTo:pageSize">
+					 	<td>{{vacancy.employee.firstName}} {{vacancy.employee.lastName}}</td>
+						<td>{{vacancy.jobTitle}}</td>
+						<td>{{vacancy.noOfPositions}}</td>
+						<td>{{vacancy.jobExperience}}</td>
+						<td>{{vacancy.jobTimeframe}}</td>
+						<td>{{vacancy.jobDescription}}</td>
+						<td class="settings-edit"><a href="" ng-click="editVacancy(vacancy)" data-toggle="modal"><i
+								class="fa fa-edit"></i></a></td>
+						<td class="settings-delete"><a href="" ng-click="delVacancy(vacancy)"><i
+								class="fa fa-trash-o"></i></a></td> 
+					</tr>  -->
+					
+				</tbody>
+			</table>
+			 <button  class="btn btn-primary"  ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+        Previous
+    </button>
+    {{currentPage+1}}/{{numberOfPages()}}
+    <button  class="btn btn-primary" ng-disabled="currentPage >= jobVacancyList.length/pageSize - 1" ng-click="currentPage=currentPage+1">
+        Next
+    </button>
+
+		
+	</form>
+
+</div>
+

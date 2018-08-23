@@ -1,0 +1,56 @@
+<div class="tab-pane active fade in" id="myJobs">
+				<div validate="validate" id="validation-form" role="form"
+					class="form-horizontal col-md-8 tab-cont-align" name="myForm">
+					<!-- start profile -->
+					<div class="prof-tab-title">
+						<div class="title-font">My Job Details</div>
+					</div>
+					
+				<div class="form-group">
+					<label class="col-lg-4" for="name">Date of joining</label>
+					<div class="col-lg-8">
+						<div>{{employment.startDate |date:'dd.MM.yyyy'}}</div>
+					</div>
+				</div>
+					
+				<div class="form-group">
+					<label class="col-lg-4" for="name">Job title</label>
+					<div class="col-lg-8">
+						<div>{{employment.jobTitle.title}}</div>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="col-lg-4" for="name">Department</label>
+					<div class="col-lg-8">
+						<div>{{employment.department.name}}</div>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="col-lg-4" for="name">Band</label>
+					<div class="col-lg-8">
+						<div>{{employment.jobTitle.band.name}}</div>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="col-lg-4" for="name" ng-hide="employment.band.id=='20'">Reporting manager</label>
+					<div class="col-lg-8">
+						<div ng-hide="employment.band.id=='20'">{{employment.employeeByReporting.firstName}} {{employment.employeeByReporting.lastName}}</div>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="col-lg-4" for="name">Status</label>
+					<div class="col-lg-8">
+						<div>{{employment.employmentStatus.status}}</div>
+					</div>
+				</div>
+					
+					
+					
+					
+					
+</div>
+</div>

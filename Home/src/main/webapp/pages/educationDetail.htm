@@ -1,0 +1,178 @@
+  <div  id="education"  ng-init="getEducation()">
+            <!-- start education -->
+           
+            <div class="prof-tab-title"><div class="title-font">Education <span class="add-link" ng-click="addEducation()"><a href="" id="addDetails">[ Add <i class="fa fa-plus-circle"></i> ]</a></span></div></div>
+
+<accordion >
+ 
+    <accordion-group  is-open="status" ng-repeat="neweducation in educationList">
+   <accordion-heading>
+   
+           <a ng-hide="neweducation.schoolGraduation.length == ''"> {{neweducation.schoolGraduation}} - {{neweducation.yearPassed}} </a> 
+					<a ng-show="neweducation.schoolGraduation.length == undefined"> EDUCATION </a>
+					
+        </accordion-heading>
+  <div>
+<a  href="" class="pull-right settings-delete edu-space"
+					ng-click="delEducation($index)"><i class="fa fa-trash-o"></i></a>
+					<a href="" class="pull-right settings-edit edu-space"
+					ng-click ="editEducation($index)"><i class="fa fa-edit" ></i></a>
+</div>
+					
+ <div class="" ng-switch on="isEduSaved">
+					 <div ng-switch-when="true">
+                     <form validate="validate" id="validation-form" role="form" class="form-horizontal col-md-9 ng-pristine ng-invalid ng-invalid-required tab-cont-align" name="myForm" ng-submit="addEducation1($index)">
+                       <fieldset>
+							 <div style="display: none;" class="form-group">
+								<label  class="col-lg-3">Edu Id</label>
+								<div class="col-lg-8">
+
+									<input type="text"  ng-model="neweducation.id" class="form-control ng-pristine ng-invalid ng-invalid-required" name="id" id="eduId">
+								</div>
+							</div>
+
+							<div class="form-group">
+                                
+								<div class="col-lg-8">
+									<input type="text" required  ng-model="neweducation.schoolGraduation" class="form-control ng-pristine ng-invalid ng-invalid-required" placeholder="Basic/Graduation" name="gname" id="gname">
+								</div>
+								<div ng-show="myForm.gname.$error.required" class="asterik">*</div>
+							</div>
+                           							
+							<div class="form-group">
+
+								<div class="col-lg-8">
+									<input type="text" required ng-model="neweducation.specialization" class="form-control ng-pristine ng-invalid ng-invalid-required" placeholder="Specialization" name="sname" id="sname">
+								</div>
+								<div ng-show="myForm.sname.$error.required" class="asterik">*</div>
+							</div>
+
+							<div class="form-group">
+
+								<div class="col-lg-8">
+
+									<input type="text" required  ng-model="neweducation.institution" class="form-control ng-pristine ng-invalid ng-invalid-required" placeholder="Institution" name="iname" id="iname">
+								</div>
+								<div ng-show="myForm.iname.$error.required" class="asterik">*</div>
+							</div>
+
+
+							<div class="form-group">
+								<div class="col-lg-8">
+								<div ng-repeat="edutype in educationTypes">
+													<input type="radio" ng-model="neweducation.educationType.id" name="EduType"
+														value="{{edutype.id}}" id="option-{{edutype.id}}"  required>
+													<label for="option-{{edutype.id}}" >{{edutype.type}}</label>
+												</div>
+							
+								</div>
+								<div required="" ng-show="myForm.EduType.$error.required" class="asterik ng-hide">*</div>
+							</div>
+
+
+							<div class="form-group">
+								<div class="col-lg-8">
+									<select  ng-model="neweducation.yearPassed" required ng-init="newValue($index)" ng-options="n for n in yearOpts"  class="form-control" placeholder="Passedout year" name="year_passed"><option value="" >-- Select Year --</option></select>
+								</div>
+								<div required="" ng-show="myForm.year_passed.$error.required" class="asterik ng-hide">*</div>
+							</div>
+							
+							<div class="form-group">
+								<div class="col-lg-8">
+									&nbsp;&nbsp;
+									<button ng-click="cancelEdu($index)" class="btn btn-warning pull-right" type="button"><i class="fa fa-times-circle"></i> Cancel</button>
+									
+									<button style="margin: 0 5px;"  type="submit" class="btn btn-primary pull-right">
+										<i class="fa fa-save"></i> Save
+									</button>
+									
+
+
+								</div>
+							</div>
+						</fieldset>
+						</form>
+						</div>
+											<div ng-switch-when="false">	
+					<form name="myForm" class="form-horizontal col-md-7" role="form"
+						id="validation-form" validate="validate">
+						<fieldset>
+
+							 <div class="form-group" style="display: none;">
+
+								<label class="col-lg-3" for="name">Edu Id</label>
+								<div class="col-lg-8">
+
+									<div>
+									{{neweducation.id}}
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+
+								<label class="col-lg-4" for="name">Basic/Graduation</label>
+								<div class="col-lg-8">
+									<div>
+									{{neweducation.schoolGraduation}}
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+
+								<label class="col-lg-4" for="name">Specialization</label>
+								<div class="col-lg-8">
+									<div>
+									{{neweducation.specialization}}
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+
+								<label class="col-lg-4" for="name">Institution</label>
+								<div class="col-lg-8">
+									<div>
+									{{neweducation.institution}}
+									</div>
+									
+								</div>
+								<div class="asterik" ng-show="myForm.iname.$error.required">*</div>
+							</div>
+							
+							<div class="form-group">
+								<label class="col-lg-4">Type</label>
+								<div class="col-lg-8">
+									<div>
+									 {{neweducation.educationType.type}}
+									</div>
+								</div>
+								</div>
+
+
+							<div class="form-group">
+								<label class="col-lg-4" for="name">Passed out year</label>
+								<div class="col-lg-8">
+									<div>
+									 {{neweducation.yearPassed}}
+									</div>
+								</div>
+							</div>
+							
+							<br>
+							<div class="form-group">
+								<div class="col-lg-4"></div>
+								
+							</div>
+						</fieldset>
+					</form>
+					</div>
+      </div>
+    </accordion-group>   
+  </accordion>
+					
+					
+            <!-- end eduction -->            
+            </div>
+	

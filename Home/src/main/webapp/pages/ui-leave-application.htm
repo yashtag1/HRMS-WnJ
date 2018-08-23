@@ -1,0 +1,142 @@
+  <div id="page-wrapper">
+        <div class="container incr-height" ng-init="getLeaveRequest()"> 
+        <!--Start Content -->
+     <div class="prof-tab-title"><div class="title-font">Leave Application</div></div>
+      
+      <form validate="validate" id="validation-form" ng-submit="checkNo()" role="form" class="form-horizontal col-md-7 ng-scope ng-invalid ng-invalid-required ng-dirty" name="myForm" >
+		<fieldset>
+			<!-- <div class="form-group">
+				<label for="name" class="col-lg-3 padding-zero">Designation</label>
+				<div class="col-lg-8">
+					<select ng-options="dept.id as dept.name for dept in options" required="" ng-model="employee.dname" class="form-control ng-dirty ng-valid ng-valid-required" name="dname" id="dept"><option ng-selected="selected" value="" class="">Select Department</option><option value="0">Senior Developers</option><option value="1">Junior Developers</option><option value="2">Trainee</option></select>
+				</div>
+				
+			</div> -->
+			<div class="form-group">
+			<label for="name" class="col-lg-3 padding-zero">Application date</label>
+					<div class="col-md-8">
+						<div class="input-group">
+							<input type="text" id="datepicker" ng-readonly="true" ng-model="LeaveRequest.applicationDate" class="form-control ng-pristine ng-invalid ng-invalid-required" placeholder="Application Date" name="dob" required>
+							<span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
+						</div>
+					</div>
+				</div>
+
+			<div class="form-group">
+				<label class="col-md-3 padding-zero">I request leave</label>
+				<div class="col-md-8">
+					<!--<div class="input-group">
+						<input type="text" required="" ng-model="employee.start" class="form-control hasDatepicker ng-pristine ng-invalid ng-invalid-required" placeholder="From" name="leave" id="datepicker">
+						<span ng-show="myForm.start.$error.required" class="ng-hide">This is not a
+							valid Date.</span><span class="input-group-addon">&nbsp;<i class="fa fa-calendar fa-fw"></i></span><input type="text" required="" style="margin: 0 6px;" ng-model="employee.end" class="form-control ng-pristine ng-invalid ng-invalid-required" placeholder="To" name="leave" id="datepickerone">
+						<span ng-show="myForm.end.$error.required" class="ng-hide">This is not a
+							valid Date.</span><span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
+					</div>-->
+					
+                        <div  class="input-group date col-md-5 pull-left" >
+						<input type="text" id="from" required  ng-model="LeaveRequest.leaveFrom" jqdatepicker class="form-control ng-pristine ng-invalid ng-invalid-required" placeholder="From" name="leave" ><span ng-show="myForm.start.$error.required" class="ng-hide" style="display:none;">This is not a
+							valid Date.</span>
+                                    <span class="input-group-addon"><span class="glyphicon-calendar glyphicon"></span>
+                                </div>
+                                
+                                <div  class="input-group date col-md-5 pull-right">
+						<input type="text" id="to" required style="margin: 0 6px;" ng-model="LeaveRequest.leaveTo" jqdatepicker class="form-control ng-pristine ng-invalid ng-invalid-required" placeholder="To" name="leave" >                                    
+                       <span ng-show="myForm.end.$error.required" class="ng-hide" style="display:none;">This is not a
+							valid Date.</span> <span class="input-group-addon"><span class="glyphicon-calendar glyphicon"></span>
+                                </div>
+				</div>
+				<div ng-show="myForm.leave.$error.required" class="asterik">
+						 *
+					</div>
+				
+			</div>
+			
+			<div class="form-group">
+				<label class="col-lg-3 padding-zero">Type of leave</label>
+				<div class="col-lg-8">
+					<select id="leaveType" ng-options="type.benefitType as type.benefitType.description for type in leaveBenefit" required ng-model="LeaveRequest.benefitType" class="form-control ng-pristine ng-invalid ng-invalid-required" name="tleave" id="type" ng-change="getLeave()"><option ng-selected="selected" value="" class="">Select Type</option></select>
+				</div>
+				<div ng-show="myForm.tleave.$error.required" class="asterik">
+						 *
+				</div>
+				</div>
+			
+			<div class="form-group">
+				<label for="name" class="col-lg-3 padding-zero">Available leaves</label>
+				<div class="col-lg-8">
+					<input type="text" required id ="avaleaves" class="form-control ng-pristine ng-invalid ng-invalid-required" value="{{leave}}" name="phone" ng-readonly="true">
+				</div>
+			</div>
+		
+			<div class="form-group" ng-show="LeaveRequest.leaveTo == LeaveRequest.leaveFrom && (LeaveRequest.benefitType.type == 'SL' || LeaveRequest.benefitType.type == 'CL' || LeaveRequest.benefitType.type == 'LOP')">
+					<label for="name" class="col-lg-3 padding-zero">Type</label>
+				<div class="col-lg-8">
+				<div class="radio pull-left col-md-3">
+						<label><input type="radio" name="type" value="Half day" class="ng-pristine ng-valid ng-invalid-required"  id="optionsRadios2" ng-model="LeaveRequest.type" ng-required="LeaveRequest.leaveTo == LeaveRequest.leaveFrom && (LeaveRequest.benefitType.type == 'SL' || LeaveRequest.benefitType.type == 'CL' || LeaveRequest.benefitType.type == 'LOP')"> Half day</label>
+          		</div>
+				<div class="radio pull-left col-md-3">
+						<label ng-hide="leave=='0.5'"><input type="radio" name="type" value="Full day" ng-hide="leave=='0.5'" class="ng-pristine ng-valid ng-invalid-required"  id="optionsRadios1" ng-model="LeaveRequest.type" ng-required="LeaveRequest.leaveTo == LeaveRequest.leaveFrom && (LeaveRequest.benefitType.type == 'SL' || LeaveRequest.benefitType.type == 'CL' || LeaveRequest.benefitType.type == 'LOP')"> Full day </label>
+					</div>
+				</div>
+				<div ng-show="myForm.type.$error.required" class="asterik" >*</div>
+			</div>
+			
+			<div class="form-group" ng-show="LeaveRequest.type=='Half day'">
+					<label for="name" class="col-lg-3 padding-zero">Session</label>
+				<div class="col-lg-8">
+				<div class="radio pull-left col-md-3">
+						<label><input type="radio" name="session" value="Morning" class="ng-pristine ng-valid ng-invalid-required"  id="optionsRadios1" ng-model="LeaveRequest.session" ng-required="LeaveRequest.type=='Half day'"> Morning </label>
+					</div>
+					<div class="radio pull-left col-md-3">
+						<label><input type="radio" name="session" value="Afternoon" class="ng-pristine ng-valid ng-invalid-required"  id="optionsRadios2" ng-model="LeaveRequest.session" ng-required="LeaveRequest.type=='Half day'"> Afternoon </label>
+          		</div>
+				</div>
+				<div ng-show="myForm.session.$error.required" class="asterik">*</div>
+			</div>
+		
+			<div class="form-group">
+				<label for="name" class="col-lg-3 padding-zero">Reasons</label>
+				<div class="col-lg-8">
+					<textarea required="" ng-model="LeaveRequest.reason" name="reason" class="form-control ng-pristine ng-invalid ng-invalid-required" placeholder="Comments" cols="50" rows="4"></textarea>
+				</div>
+				<div ng-show="myForm.reason.$error.required" class="asterik">
+						 *
+				</div>
+				</div>
+		    
+		    <div class="form-group">
+				<label for="name" class="col-lg-3 padding-zero">Contact details while on
+					leave</label>
+				<div class="col-lg-8">
+					<input type="text"  ng-model="LeaveRequest.contactNo" class="form-control ng-pristine ng-valid-number ng-valid-pattern ng-invalid ng-invalid-required"  name="contactNo" id="contactNo" required>
+						<!-- <div>
+							<span ng-show="myForm.contactNo.$error.pattern" class="ng-hide">Enter 10 digit Valid Mobile No.</span> 
+						</div> -->
+				</div>
+				<div ng-show="myForm.contactNo.$error.required" class="asterik">
+						 *
+				</div>
+			</div>
+			<!-- /.form-group -->
+            
+			<div class="form-group">
+				<div class="col-lg-4"></div>
+				<div class="col-lg-7">
+				<button  ng-disabled="loading" ng-click="cancelRequest()" type="button" class="btn btn-warning pull-right"><i class="fa fa-times-circle"></i> Cancel</button>
+					&nbsp;&nbsp;
+					<button style="margin: 0 5px;" ng-disabled="loading" type="submit" class="btn btn-primary pull-right btn-align-reg">
+						<i class="fa fa-save"></i> <span data-ng-hide="loading"> Submit</span>
+						<span data-ng-show="loading"> Submit<i class="fa fa-spinner fa-spin"></i> </span>
+					</button>
+					
+					
+					
+				</div>
+			</div>
+		</fieldset>
+	</form>
+	<!-- <p>Pristine: {{myForm.$pristine}}</p> -->
+	    <!--End Content -->
+		</div>
+    <!-- /#container --> 
+  </div>

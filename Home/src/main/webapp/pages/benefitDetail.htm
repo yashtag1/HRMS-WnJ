@@ -1,0 +1,59 @@
+<div class="tab-pane active fade in" id="benefitDetail">
+
+	<!-- start add benefit -->
+	<form validate="validate" id="" role="form"
+		class="form-horizontal col-md-9 ng-pristine ng-invalid ng-invalid-required"
+		name="myForm">
+<div class="prof-tab-title col-md-12 pull-left padding-zero"><div class="title-font pull-left">Benefit <span class="add-link" ng-click="add()"><a href="" id="addDetails">[ Add <i class="fa fa-plus-circle"></i> ]</a></span>
+</div>
+</div><br><br><br>		
+
+			<div class="col-lg-5 padding-zero" id="addForm"
+				style="display: none;">
+					
+				<label for="" class="col-md-6 padding-zero">&nbsp;Employee name</label> <input
+					class="form-control" type="text" name="benefit"
+					ng-model="benefit.employee" required
+					typeahead="Type as Type.firstName +'&nbsp;'+ Type.lastName for Type in employeeList | filter:{firstName:$viewValue}"><br>
+
+				<label for="" class="col-md-6 padding-zero">&nbsp;Employee id</label> <input
+					class="form-control" type="text" name="type"
+					ng-model="benefit.employee.empId" value="{{benefit.employee.empId}}"
+					ng-readonly="true" required><br> 
+					
+				<label for="" class="col-md-6 padding-zero">&nbsp;Benefit type</label> <select
+					id="Type" name="benefit" class="form-control"
+					ng-model="benefit.benefitType" required
+					ng-options="Type as Type.type for Type in benefitTypeList">
+					<option class="" value="" ng-selected="selected">Select</option>
+				</select><br>
+				
+				 <label for="" class="col-md-9 padding-zero">&nbsp;Eligibility</label>
+				<input class="form-control" type="text" name="type"
+					ng-model="benefit.value" required=""><br> 
+					
+					<label for="" class="col-md-6 padding-zero">&nbsp;Year</label> <input 
+					class="form-control" type="text" name="type"
+					ng-model="benefit.year" required=""><br>
+				<div
+					class="col-md-12 col-xs-12 col-sm-12 col-lg-12 padding-zero button-align">
+					<button type="button" ng-click="cancel()"
+					class="btn btn-warning pull-right btn-align-reg">
+					<i class="fa fa-times-circle"></i> Cancel
+					</button>
+					
+					<button  ng-click="addBenefit()"
+						type="submit" class="btn btn-primary pull-right">
+						<i class="fa fa-save"></i> Save
+					</button>
+					
+					
+				</div>
+			</div>
+ 
+ <div class="gridStyle pull-left" ng-grid="gridOptions"></div>
+ </form>
+ </div>
+
+
+

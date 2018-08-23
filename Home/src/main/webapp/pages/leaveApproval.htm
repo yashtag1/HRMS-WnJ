@@ -1,0 +1,60 @@
+<div class="" id="leaveApproval">
+                  
+<form  validate="validate" id="validation-form" role="form" class="form-horizontal col-md-12 ng-scope tab-cont-align" name="myForm">
+
+<div class="prof-tab-title col-md-12 pull-left padding-zero"><div class="title-font pull-left">Leave Approvals</div><br><br><br>
+<div class="approval" ng-show="leaveList.length == 0">No leaves for approvals</div>
+<div class="gridStyle pull-left" ng-grid="gridOptions" ng-if="leaveList.length > 0"></div>
+  </div> 
+</form>
+</div>	
+	
+
+							
+<div role="dialog" class="modal fade in" id="leaveReason"
+	data-backdrop="static">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button aria-hidden="true" data-dismiss="modal" class="close"
+					type="button">X</button>
+				<h4 class="modal-title">REASON</h4>
+			</div>
+			<div class="modal-body">{{reason}}</div>
+
+		</div>
+	</div>
+</div>
+
+<div role="dialog" class="modal fade in" id="rejectReason"
+	data-backdrop="static">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button aria-hidden="true" data-dismiss="modal" class="close"
+					type="button">X</button>
+				<h4 class="modal-title">REASON</h4>
+			</div>
+			<div class="modal-body">
+				<form id="myform" name="myform" ng-submit="rejectLeave()" validate>
+					<fieldset>
+						<textarea required="" ng-model="rejectReason" name="reason"
+							class="form-control ng-dirty ng-valid ng-valid-required"
+							placeholder="Comments" cols="50" rows="4"></textarea>
+
+						<div class="col-md-12 margin-top15">
+							<label for="" class="col-md-6"></label>
+							<div class="col-md-5">
+								<button class="btn btn-primary pull-right btn-align-reg"
+									type="submit"  ng-click="rejectLeave()" value="Save">
+									<i class="fa fa-save"></i> Send
+								</button>
+							</div>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+
+		</div>
+	</div>
+</div>

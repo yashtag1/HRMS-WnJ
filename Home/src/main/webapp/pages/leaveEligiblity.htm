@@ -1,0 +1,37 @@
+
+<div class="tab-pane active fade in" id="leaveEligiblity">
+	<div validate="validate" id="validation-form" role="form"
+		class="form-horizontal col-md-12 tab-cont-align" name="myForm">
+		<!-- start profile -->
+		<div class="prof-tab-title"><div class="title-font">My Eligibility
+		</div>
+		</div>
+		
+		<div ng-show="leaves.length==0">There is no eligibility to show</div>
+		
+			<div ng-hide="leaves.length==0">
+			<table width="100%"
+				class="table-hover table-striped table table-bordered">
+				<tr>
+					<th>Leave type</th>
+					<th>Balance</th>
+					<th>Approved</th>
+					<th>Pending</th>
+					<!-- <th>balance</th> -->
+					<th>Year</th>
+				</tr>
+				<tr data-ng-repeat="leave in leaves">
+					<td>{{leave.name}}</td>
+					<td>{{leave.balance}}</td>
+					<td>{{leave.approved}}</td>
+					<td>{{leave.pending}}</td>
+					<!-- <td>{{leave.balance}}</td> -->
+					<td>{{leave.year}}</td>
+				</tr>
+
+			</table>
+
+	</div>
+		<!-- end profile -->
+	</div>
+</div>

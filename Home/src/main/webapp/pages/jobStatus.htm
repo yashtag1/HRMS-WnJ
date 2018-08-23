@@ -1,0 +1,87 @@
+<div class="tab-pane fade in" id="jobStatus" ng-controller="employmentStatusController">
+
+	<form validate="validate" id="" role="form"
+		class="form-horizontal col-md-9 ng-pristine ng-invalid ng-invalid-required"
+		name="myForm">
+<!-- 	<div class="prof-tab-title col-md-12 padding-zero">
+			Add Status <span class="add-link" ng-click="addStatus()"><a href="" id="addDetails">[ Add <i
+					class="fa fa-plus-circle"></i> ]
+			</a></span>
+			<div class="input-group col-md-5 pull-right search-bx">
+				<input type="text" class="form-control search-query" placeholder="Search" ng-model="search.status">
+				<span class="input-group-btn">
+					<button class="btn btn-default search-style" type="button">
+						<i class="fa fa-search"></i>
+					</button>
+				</span>
+			</div>
+		</div>
+-->
+
+			<div class="prof-tab-title col-md-12 pull-left padding-zero"><div class="title-font pull-left">Add Status <span class="add-link" ng-click="addStatus()"><a href="" id="addDetails">[ Add <i class="fa fa-plus-circle"></i> ]</a></span>
+</div>
+               <div class="subnavbar pull-right">
+                  <ul class="nav pull-right">
+                    <li class="dropdown">
+				<!-- <button class="btn btn-primary pull-right dropdown-toggle search-fltr" data-toggle="dropdown" type="button"><i class="fa 
+
+fa-filter"></i></button> --> 
+               <!--  <ul class="dropdown-menu pull-right search-dd">
+                    <li><a href="#" data-original-title="" title="">Employee ID</a></li>
+                    <li><a href="profile.html" data-original-title="" title="">Employee Name</a></li>
+                    <li><a href="#" data-original-title="" title="">Department</a></li>
+                </ul> -->                
+                	</li>
+                  </ul>
+				</div>
+                <div class="col-md-4 pull-right search-bx padding-zero">
+                    <input class="form-control" type="text"  name="" placeholder="Search Status" ng-model="search.status">
+                </div>
+              </div>		
+
+		<div class="col-lg-5 padding-zero" id="addForm" style="display: none">
+			
+			<label for="" class="col-md-6 padding-zero">Add status</label> <input
+				class="form-control" type="text" name="status"
+				ng-model="employmentStatus.status" required> <br>
+				
+			<label for="" class="col-md-6 padding-zero">Description</label> <input
+				class="form-control" type="text" name="status"
+				ng-model="employmentStatus.description" required> <br>
+			<div
+				class="col-md-12 col-xs-12 col-sm-12 col-lg-12 padding-zero  button-align">
+				<button type="button" ng-click="cancel()"
+					class="btn btn-warning pull-right btn-align-reg">
+					<i class="fa fa-times-circle"></i> Cancel
+				</button>
+				<button  ng-click="saveStatus()"
+					type="submit" class="btn btn-primary pull-right">
+					<i class="fa fa-save"></i> Save
+				</button>
+				
+			</div>
+
+		</div>
+		<table class="table-hover table-striped table table-bordered col-md-5">
+			<tbody>
+				<tr>
+					<th>Status</th>
+					<th>Description</th>
+					<th class="width10">Edit</th>
+					<th class="width10">Delete</th>
+				</tr>
+				<tr data-ng-repeat="status in empStatus| filter:search:strict">
+					<td>{{status.status}}</td>
+					<td>{{status.description}}</td>
+					<td class="settings-edit" ng-click="editStatus(status)"><a href=""><i
+							class="fa fa-edit"></i></a></td>
+					<td class="settings-delete" ng-click="deleteStatus(status)"><a href=""><i
+							class="fa fa-trash-o"></i></a></td>
+				</tr>
+				
+			</tbody>
+		</table>
+
+	</form>
+
+</div>

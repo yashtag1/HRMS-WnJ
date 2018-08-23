@@ -1,0 +1,48 @@
+
+<div id="wrapper">
+
+	<!--Start Header -->
+
+	<!--End Header -->
+
+	<div id="page-wrapper">
+		<div class="container incr-height">
+			<!--Start Content -->
+			<div style="width: 8%; float: left; margin-left: 9%;">
+				<!-- required for floating -->
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs tabs-left padding-right0 profile-tab">
+					<li id="candidate"><a ui-sref=".jobCandidate" data-toggle="tab" data-placement="left" data-original-title="Add Candidate" 
+						class="bordertop0"><img src="../assets/images/add-candidate-icon.png"
+							width="70" height="61"></a></li>
+				</ul>
+				<ul class="nav nav-tabs tabs-left padding-right0 profile-tab">
+					<li id="application"><a ui-sref=".jobApplication" data-toggle="tab" data-placement="left" data-original-title="Job Application" 
+						class="bordertop0"><img src="../assets/images/profile-img3.png"
+							width="70" height="61"></a></li>
+				</ul>
+				<ul class="nav nav-tabs tabs-left padding-right0 profile-tab">
+					<li id="schedule"><a ui-sref=".interviewSchedule" data-toggle="tab" data-placement="left" data-original-title="Interview Schedule" 
+						class="bordertop0"><img src="../assets/images/profile-img3.png"
+							width="70" height="61"></a></li>
+				</ul>
+			</div>
+
+			<div class="col-xs-9">
+				<!-- Tab panes -->
+				<div class="tab-content">
+					<div ui-view></div>
+				</div>
+			</div>
+
+			<!--End Content -->
+		</div>
+		<!-- /#container -->
+	</div>
+	<!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+
+

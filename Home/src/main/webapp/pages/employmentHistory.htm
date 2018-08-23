@@ -1,0 +1,126 @@
+ <div  id="job-history" ng-init="getEmploymentHistory()">
+            <!-- start job history -->
+            
+                        <div class="prof-tab-title"><div class="title-font">Employment History<span class="add-link" ng-click="addEmploymentHistory()"><a href="" id="addDetails">[ Add <i class="fa fa-plus-circle"></i> ]</a></span></div></div>
+                    
+	
+	<accordion >
+ 
+    <accordion-group  is-open="status" ng-repeat="newemphistory in emphistoryList">
+     <accordion-heading>
+     <a> Employment History </a>
+     </accordion-heading>
+     <div class="">
+<a  href="" class="pull-right settings-delete edu-space"
+					ng-click="delEmpHistory($index)"><i class="fa fa-trash-o"></i></a>
+					<a href="" class="pull-right settings-edit edu-space"
+					ng-click="editEmp($index)"><i class="fa fa-edit"></i></a>
+</div>
+     <div class="" ng-switch on="isEmpHistorySaved">
+			 <div ng-switch-when="true">
+			  <form  validate="validate" id="validation-form" role="form" class="form-horizontal col-md-9 ng-scope ng-pristine ng-invalid ng-invalid-required tab-cont-align" name="myForm" ng-submit="addEmpHistory($index)">
+					<fieldset>
+						<div class="form-group">
+							<div class="col-lg-8">
+								<input type="text" required ng-model="newemphistory.employerName" class="form-control ng-pristine ng-invalid ng-invalid-required" placeholder="Employer name" name="ename">
+							</div>
+							<div ng-show="myForm.ename.$error.required" class="asterik">*</div>
+						</div>
+						
+						<div class="form-group">
+							<div class="col-lg-8">
+								<div class="input-group">
+									<input type="text" required ng-model="newemphistory.startDate" class="form-control ng-pristine ng-invalid ng-invalid-required" placeholder="Date of joining" name="joinpicker" jqdatepicker ><span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
+								</div>
+							</div>
+							<div ng-show="myForm.joinpicker.$error.required" class="asterik">*</div>
+						</div>
+						
+						<div class="form-group">
+							<div class="col-lg-8">
+								<div class="input-group">
+									<input type="text" required  ng-model="newemphistory.endDate" class="form-control ng-pristine ng-invalid ng-invalid-required" placeholder="Date of relieve" name="relievepicker" jqdatepicker><span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
+								</div>
+							</div>
+							<div ng-show="myForm.relievepicker.$error.required" class="asterik">*</div>
+						</div>
+						
+						<div class="form-group">
+
+							<div class="col-lg-8">
+								<input type="text" required ng-model="newemphistory.designation" class="form-control ng-pristine ng-invalid ng-invalid-required" placeholder="Designation" name="desiname" id="name">
+							</div>
+							<div ng-show="myForm.desiname.$error.required" class="asterik">*</div>
+						</div>
+
+						<!-- /.form-group -->
+						<div class="form-group">
+								<div class="col-lg-8">
+								<button ng-click="cancelEmp($index)" class="btn btn-warning pull-centre pull-right" type="reset"><i class="fa fa-times-circle"></i> Cancel</button> 
+								
+								<button style="margin: 0 5px;" ng-enabled="myForm.$valid"  type="submit" class="btn btn-primary pull-right">
+									<i class="fa fa-save"></i> Save
+								</button>
+								
+							</div>
+						</div>
+					</fieldset>
+					</form>
+					</div>
+					<div ng-switch-when="false">
+				<form name="myForm" class="form-horizontal col-md-7" role="form"
+				id="validation-form" validate="validate" >
+					<fieldset>
+
+						<div class="form-group">
+
+							<label class="col-lg-4" for="name">Employer name</label>
+							<div class="col-lg-8">
+								{{newemphistory.employerName}}
+							</div>
+
+						</div>
+						<div class="form-group">
+
+							<label class="col-lg-4" for="name">Date of joining</label>
+							<div class="col-lg-8">
+								<div class="input-group">
+									{{newemphistory.startDate | date :"dd-MM-yyyy"}}
+								</div>
+							</div>
+
+						</div>
+						<div class="form-group">
+
+							<label class="col-lg-4" for="name">Date of relieve</label>
+							<div class="col-lg-8">
+
+
+								<div class="input-group">
+									{{newemphistory.endDate | date :"dd-MM-yyyy"}}							
+									</div>
+							</div>
+						</div>
+						<div class="form-group">
+
+							<label class="col-lg-4" for="name">Designation</label>
+							<div class="col-lg-8">
+									{{newemphistory.designation}}
+							</div>
+
+						</div>
+
+						
+						<br>
+						<div class="form-group">
+							<div class="col-lg-4"></div>
+							
+						</div>
+					</fieldset>
+				</form>
+				</div>
+         </div>
+    </accordion-group>
+    </accordion>			
+            <!-- end job history -->            
+            </div>

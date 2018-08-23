@@ -1,0 +1,71 @@
+<!doctype html>
+<html ng-app="userModule">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Axim Soft | HRMS</title>
+
+<!-- Core CSS - Include with every page -->
+<link href="../assets/css/bootstrap.css" rel="stylesheet"
+	type="text/css">
+<link href="../assets/css/font-awesome.css" rel="stylesheet"
+	type="text/css">
+<link href="../assets/css/hrms-admin.css" rel="stylesheet"
+	type="text/css">
+<link href="../assets/css/hrms-responsive.css" rel="stylesheet"
+	type="text/css">
+<link href="../assets/css/jquery-ui-1.10.0.custom.css" rel="stylesheet"
+	type="text/css">
+
+</head>
+
+<body>
+	<div id="wrapper" ng-controller="dashboardController">
+
+		<!--Start Header -->
+		<nav class="navbar navbar-inverse navbar-fixed-top border-none"
+			role="navigation">
+			<div class="navbar-brand logo-hldr">
+				<img src="../assets/images/axim-logo.png" width="242" height="54">
+			</div>
+			<div class="login-title">Dashboard</div>
+		</nav>
+		<!--End Header -->
+
+		<div id="page-wrapper">
+			<div class="container incr-height">
+				<a id="logout" href="#">Logout</a> <a id="editProfile"
+					href="#editProfile">Profile</a> <a href="#educationDetail">Education</a>
+				<a href="#leaveRequest">Request Leave</a>
+				<a href="#employmentHistory">Employment History</a>
+				<a href="#address">Address</a>
+				<div ng-view></div>
+				
+				<!-- /#container -->
+			</div>
+			<!-- /#page-wrapper -->
+
+		</div>
+
+	</div>
+	<!-- /#wrapper -->
+	<div class="footer">
+		<div class="container text-center">All Rights Reserved &copy; by
+			Aximsoft</div>
+	</div>
+
+	<!-- Core Scripts - Include with every page -->
+	<script src="../assets/js/jquery-1.10.2.js"></script>
+	<script src="../assets/js/jquery-ui-1.10.0.custom.min.js"></script>
+	<script src="../assets/js/bootstrap.js"></script>
+	<script src="../assets/js/angular.min.js"></script>
+	<script src="../assets/js/angular-resource.min.js"></script>
+	<script src="../assets/js/angular-route.js"></script>
+	<script src="../assets/js/user-module.js"></script>
+	<script src="../assets/js/authenticationScript.js"></script>
+
+
+</body>
+</html>

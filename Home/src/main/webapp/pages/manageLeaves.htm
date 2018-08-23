@@ -1,0 +1,152 @@
+
+<div class="tab-pane active fade in" id="manageLeaves">
+	<form validate="validate" id="validation-form" role="form"
+		class="form-horizontal col-md-12 tab-cont-align" name="myForm">
+	
+		<div class="prof-tab-title col-md-12 pull-left padding-zero"><div class="title-font pull-left">Employees Leave History
+</div></div><br><br><br>
+<div class="gridStyle" ng-grid="gridOptions"></div>
+ </form>
+</div>
+<div role="dialog" class="modal fade in" id="leaveReason"
+	data-backdrop="static">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button aria-hidden="true" data-dismiss="modal" class="close"
+					type="button">X</button>
+				<h4 class="modal-title">REASON</h4>
+			</div>
+			<div class="modal-body">{{reason}}</div>
+
+		</div>
+	</div>
+</div>
+<div role="dialog" class="modal fade in" id="edit-msg"
+	data-backdrop="static">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button aria-hidden="true" data-dismiss="modal" class="close"
+					type="button"></button>
+				<h4 class="modal-title">Update Leaves</h4>
+			</div>
+			<div class="modal-body">
+				<form id="myform" name="myform" ng-submit="" validate>
+					<fieldset>
+
+						 <div class="col-md-12">
+
+							<div class="col-md-5">
+
+								<input type="hidden" name="id" ng-model="LeaveRequest.LeaveRequest">
+							</div>
+
+						</div>
+						
+						<div class="col-md-12">
+							<label for="" class="col-md-6">From</label>
+							<div class="col-md-5">
+								<div class="input-group date pull-left">
+									<input type="text" id="from" required name="leaveFrom"
+										placeholder="From" class="form-control ng-pristine ng-invalid ng-invalid-required"
+										ng-model="LeaveRequest.leaveFrom" jqdatepicker><span
+										ng-show="myForm.leaveFrom.$error.required" class="ng-hide"
+										style="display: none;">This is not a valid Date.</span><span
+										class="input-group-addon"><span
+										class="glyphicon-calendar glyphicon"></span> </span>
+								</div>
+							</div>
+							<!-- /controls -->
+						</div>
+
+						<div class="col-md-12 margin-top15">
+							<label for="" class="col-md-6">To</label>
+							<div class="col-md-5">
+								<div class="input-group date pull-left">
+									<input type="text" id="to" required name="leaveTo"
+										placeholder="To" class="form-control ng-pristine ng-invalid ng-invalid-required"
+										ng-model="LeaveRequest.leaveTo" jqdatepicker><span
+										ng-show="myForm.leaveTo.$error.required" class="ng-hide"
+										style="display: none;">This is not a valid Date.</span> <span
+										class="input-group-addon"><span
+										class="glyphicon-calendar glyphicon"></span> </span>
+								</div>
+							</div>
+							<!-- /controls -->
+						</div><br>
+						
+						<div class="col-md-12 margin-top15" ng-show="LeaveRequest.leaveTo == LeaveRequest.leaveFrom && (LeaveRequest.benefitType.type == 'SL' || LeaveRequest.benefitType.type == 'CL' || LeaveRequest.benefitType.type == 'LOP')">
+							<label for="" class="col-md-6">Type</label>
+								<div class="col-md-5">
+									<div class="pull-left" style="font-style: normal !important;">
+										<label ng-hide="leave=='0.5'"><input type="radio" name="type"
+											value="Full day"  ng-hide="leave=='0.5'"
+											class="ng-pristine ng-valid ng-invalid-required"
+											id="optionsRadios1" ng-model="LeaveRequest.type" ng-required="LeaveRequest.leaveTo == LeaveRequest.leaveFrom && (LeaveRequest.benefitType.type == 'SL' || LeaveRequest.benefitType.type == 'CL' || LeaveRequest.benefitType.type == 'LOP')">
+											Full day </label></div>
+									
+									<div class=" pull-left" style="margin-left:10px; font-style: normal !important;" >
+										<label><input type="radio" name="type"
+											value="Half day"
+											class="ng-pristine ng-valid ng-invalid-required"
+											id="optionsRadios2" ng-model="LeaveRequest.type" ng-required="LeaveRequest.leaveTo == LeaveRequest.leaveFrom && (LeaveRequest.benefitType.type == 'SL' || LeaveRequest.benefitType.type == 'CL' || LeaveRequest.benefitType.type == 'LOP')">
+											Half day</label></div>
+						</div>
+						</div>
+						
+						<div class="col-md-12 margin-top15" ng-show="LeaveRequest.type=='Half day'">
+							<label for="" class="col-md-6">Session</label>
+								<div class="col-md-5">
+									<div class="pull-left" style="font-style: normal !important;">
+										<label><input type="radio" name="session"
+											value="Morning"
+											class="ng-pristine ng-valid ng-invalid-required"
+											id="optionsRadios1" ng-model="LeaveRequest.session" ng-required="LeaveRequest.type=='Half day'">
+											Morning </label></div>
+									
+									<div class=" pull-left" style="margin-left:10px; font-style: normal !important;" >
+										<label><input type="radio" name="session"
+											value="Afternoon"
+											class="ng-pristine ng-valid ng-invalid-required"
+											id="optionsRadios2" ng-model="LeaveRequest.session" ng-required="LeaveRequest.type=='Half day'">
+											Afternoon </label></div>
+						</div>
+						</div>
+						
+						<div class="col-md-12 margin-top15">
+							<label for="" class="col-md-5"></label>
+							<div class="col-md-6">
+								<button class="btn btn-warning pull-right btn-align-reg"
+									data-dismiss="modal" ng-disabled="loading" ng-click="cancel()" type="button">
+									<i class="fa fa-times-circle"></i> Cancel
+								</button>
+
+								<button style="margin: 0 5px;" ng-disabled="loading" ng-click="requestLeave()"
+									class="btn btn-primary pull-right" type="submit" value="Save">
+									<i class="fa fa-save"></i><span data-ng-hide="loading">
+										Submit</span> <span data-ng-show="loading"> Submit<i
+										class="fa fa-spinner fa-spin"></i></span>
+								</button>
+							</div>
+						</div>
+
+					</fieldset>
+
+				</form>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+		
+
+							
+						
+
+
+
+            
+

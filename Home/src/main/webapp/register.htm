@@ -1,0 +1,154 @@
+<!doctype html>
+<html ng-app="userModule">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Axim Soft | HRMS</title>
+
+<!-- Core CSS - Include with every page -->
+<link href="./assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+<link href="./assets/css/font-awesome.css" rel="stylesheet"	type="text/css">
+<link href="./assets/css/hrms-admin.css" rel="stylesheet" type="text/css">
+<link href="./assets/css/hrms-responsive.css" rel="stylesheet" type="text/css">
+<link href="./assets/css/jquery-ui-1.10.0.custom.css" rel="stylesheet">
+
+<body>
+
+	<div id="wrapper">
+
+		<!--Start Header -->
+		<nav class="navbar navbar-inverse navbar-fixed-top border-none"
+			role="navigation">
+			<div class="navbar-brand logo-hldr">
+				<img src="./assets/images/axim-logo.png" width="242" height="54">
+			</div>
+			<div class="registration-title">User Registration</div>
+		</nav>
+		<!--End Header -->
+
+		<div id="page-wrapper">
+			<div class="container incr-height">
+				<form name="myForm" class="form-horizontal" role="form"
+					id="validation-form" validate="validate"
+					ng-controller ="saveEmployeeController" ng-submit="saveEmployee()">
+					<div class="align-cntr-reg">
+						<div class="col-md-6">
+							<div class="form-group">
+								<div class="col-lg-11">
+									<input type="text" id="name" name="uname" class="form-control"
+										ng-model="user.username" placeholder="User name" required
+										autofocus>								
+									<span class="message">{{userMessage}}</span>
+								</div>
+								<div  ng-show="myForm.uname.$error.required" class="asterik">*</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-lg-11">
+									<input type="email" id="name" name="email" class="form-control"
+										ng-model="employee.emailId" placeholder="Email id" ng-pattern="/^[A-Za-z0-9._%+-]+@aximsoft.com$/" required>
+									
+									<span ng-show="myForm.email.$error.pattern" class="ng-hide"><span class="message">This is not a
+										official email.</span></span>
+								</div>
+							<div ng-show="myForm.email.$error.required" class="asterik">*</div>
+							</div>
+							<div class="form-group">
+								<div class="col-lg-11">
+									<input type="password" id="email" name="pass"
+										class="form-control" ng-model="user.password"
+										placeholder="Password" ng-minlength="4" required>
+									
+									<span ng-show="myForm.pass.$error.minlength" class="message">minimum 4
+										chars</span>
+									
+									<!-- <span ng-show="myForm.pass.$error.maxlength" class="message">maximum 16
+										chars</span> -->
+								</div>
+								<div ng-show="myForm.pass.$error.required" class="asterik">*</div>
+							</div>
+							<div class="form-group">
+								<div class="col-lg-11">
+									<input type="password" name="repeatPassword" id="email"
+										class="form-control" placeholder="Repeat password"
+										ng-model="user.repeatPassword" placeholder="Confirm Password"
+										required>
+									
+									<div ng-blur=""><span class="message">{{pwd}}</span></div>
+								</div>
+							<div ng-show="myForm.repeatPassword.$error.required" class="asterik">*</div>
+							</div>
+							<div class="form-group">
+								<div class="col-lg-11">
+									<input type="text" id="name" name="f_name" class="form-control"
+										ng-model="employee.firstName" placeholder="First name"
+										required>
+								</div>
+							<div ng-show="myForm.f_name.$error.required" class="asterik">*</div>
+							</div>
+							<div class="form-group">
+								<div class="col-lg-11">
+									<input type="text" id="name" name="l_name" class="form-control"
+										ng-model="employee.lastName" placeholder="Last name" required>
+								</div>
+								<div ng-show="myForm.l_name.$error.required" class="asterik">*</div>
+							</div>
+							<!-- /.form-group -->
+
+							<div class="form-group">
+								<div class="col-lg-11">
+									<div class="input-group">
+										<input type="text" name="dob"  
+											placeholder="Date of birth" class="form-control"
+											ng-model="employee.dob" jqdatepicker value=valueA required/> <span
+											ng-show="myForm.dob.$error.required"></span><span 
+											class="input-group-addon">&nbsp;<i
+											class="fa fa-calendar fa-fw"></i></span>
+									</div>
+								</div>
+								<div ng-show="myForm.dob.$error.required" class="asterik">*</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-lg-11">
+									<button class="btn btn-primary pull-right btn-align-reg"
+										type="submit" 
+										ng-enabled="myForm.$valid">
+										<i class="fa fa-pencil"></i> Register
+									</button>
+
+									<button class="btn btn-warning pull-right"
+										ng-click="cancelRegister()">
+										<i class="fa fa-times-circle"></i> Cancel
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+
+		</div>
+	</div>
+	<!-- /#wrapper -->
+	<div class="footer">
+		<div class="container text-center">All Rights Reserved &copy; by
+			Aximsoft</div>
+	</div>
+
+	<!-- Core Scripts - Include with every page -->
+	<script src="./assets/js/jquery-1.10.2.js"></script>
+	<script src="./assets/js/jquery-ui-1.10.0.custom.min.js"></script>
+	<script src="./assets/js/bootstrap.js"></script>
+	<script src="./assets/js/angular.min.js"></script>
+	<script src="./assets/js/angular-resource.min.js"></script>
+	<script src="./assets/js/angular-ui-router.min.js"></script>
+	<script src="./assets/js/angular-route.js"></script>
+	<script src="./assets/js/user-module.js"></script>
+	<script src="./assets/js/ui-bootstrap-tpls-0.11.0.js"></script>
+	<script src="./assets/js/ng-grid.min.js"></script>
+
+</body>
+</html>
